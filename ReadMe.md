@@ -5,6 +5,7 @@
 - http://www.cplusplus.com/reference/stl/
 - https://thispointer.com/difference-between-vector-and-list-in-c/
 - https://www.youtube.com/watch?v=qvZGUFHWChY
+- https://www.geeksforgeeks.org/difference-between-stack-and-queue-data-structures/
 
 ## How does containers work?
 
@@ -19,8 +20,8 @@ Vector work with a dynamic array: new T[size].
 ### map
 
 Map is an associative array (key => value). It cannot have two pairs with the same key.
-We can use std::pair to store a pair keu/value.
-It's implemented using a red-black binary tree.
+We can use std::pair to store a pair key/value.
+It's implemented using a binary tree.
 
 ## stack
 
@@ -34,6 +35,42 @@ Queue is a FIFO container. As stack, we'll use an other container specified duri
 ## ToDo
 
 ### list
+
+- [ ] constructor
+- [ ] destructor
+- [ ] operator=
+- [ ] begin
+- [ ] end
+- [ ] rbegin
+- [ ] rend
+- [ ] empty
+- [ ] size
+- [ ] max_size
+- [ ] front
+- [ ] back
+- [ ] assign
+- [ ] push_front
+- [ ] pop_front
+- [ ] push_back
+- [ ] pop_back
+- [ ] insert
+- [ ] erase
+- [ ] swap
+- [ ] resize
+- [ ] clear
+- [ ] splice
+- [ ] remove
+- [ ] remove_if
+- [ ] unique
+- [ ] merge
+- [ ] sort
+- [ ] reverse
+- [ ] operator!=
+- [ ] operator==
+- [ ] operator<=
+- [ ] operator<
+- [ ] operator>=
+- [ ] operator>
 
 ### vector
 
@@ -61,6 +98,60 @@ Queue is a FIFO container. As stack, we'll use an other container specified duri
 - [ ] erase
 - [ ] swap
 - [ ] clear
+- [ ] operator!=
+- [ ] operator==
+- [ ] operator<=
+- [ ] operator<
+- [ ] operator>=
+- [ ] operator>
+
+### map
+
+- [ ] constructor
+- [ ] destructor
+- [ ] operator=
+- [ ] begin
+- [ ] end
+- [ ] rbegin
+- [ ] rend
+- [ ] empty
+- [ ] size
+- [ ] max_size
+- [ ] operator[]
+- [ ] insert
+- [ ] erase
+- [ ] swap
+- [ ] clear
+- [ ] key_comp
+- [ ] value_comp
+- [ ] find
+- [ ] count
+- [ ] lower_bound
+- [ ] upper_bound
+- [ ] equal_range
+
+### stack
+
+- [ ] empty
+- [ ] size
+- [ ] top
+- [ ] push
+- [ ] pop
+- [ ] operator!=
+- [ ] operator==
+- [ ] operator<=
+- [ ] operator<
+- [ ] operator>=
+- [ ] operator>
+
+### queue
+
+- [ ] empty
+- [ ] size
+- [ ] front
+- [ ] back
+- [ ] push
+- [ ] pop
 - [ ] operator!=
 - [ ] operator==
 - [ ] operator<=
