@@ -1,11 +1,9 @@
 # ft_containers
-
 ## Researches
 - http://www.cplusplus.com/reference/stl/
 - https://thispointer.com/difference-between-vector-and-list-in-c/
 - https://www.youtube.com/watch?v=qvZGUFHWChY
 - https://www.geeksforgeeks.org/difference-between-stack-and-queue-data-structures/
-
 ## How does containers work?
 ### list
 List works with a double linked-list.
@@ -58,7 +56,7 @@ Queue is a FIFO container. As stack, we'll use an other container specified duri
 - [ ] operator>=
 - [ ] operator>
 ### vector
-- [ ] constructor
+- [x] constructor
 - [ ] destructor
 - [ ] operator=
 - [ ] begin

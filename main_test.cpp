@@ -1,4 +1,5 @@
 #include <vector>
+#include <map>
 #include <iostream>
 
 void print_vector(std::vector<int> vec)
@@ -20,6 +21,7 @@ void print_vector(std::vector<int> vec)
 int main(void)
 {
     std::cout << "-- Testing STL containers --" << std::endl;
+    std::cout << "-- vector --" << std::endl;
     std::vector<int> vector;
     vector.push_back(-42);
     vector.push_back(21);
@@ -49,10 +51,22 @@ int main(void)
     std::cout << "-- vector.at(2): " << vector.at(2) << " --" << std::endl;
     std::cout << "-- vector.front(): " << vector.front() << " --" << std::endl;
     std::cout << "-- vector.back(): " << vector.back() << " --" << std::endl;
-    std::cout << " -- vector.clear() --" << std::endl;
+    std::cout << "-- vector.clear() --" << std::endl;
     vector.clear();
     print_vector(vector);
     std::cout << "-- empty: " << vector.empty() << " --" << std::endl;
     std::cout << "-- capacity: " << vector.capacity() << " --" << std::endl;
+    std::cout << "-- map --" << std::endl;
+    std::map<std::string, std::string> map;
+    map["test"] = "42";
+    map["mip"] = "bip";
+    std::cout << "-- size: " << map.size() << " --" << std::endl;
+    map.erase("test");
+    std::cout << "-- size: " << map.size() << " --" << std::endl;
+    std::cout << "-- map[\"test\"]: " << map["test"] << " --" << std::endl;
+    std::cout << "-- map[\"mip\"]: " << map["mip"] << " --" << std::endl;
+
+	std::vector<int> vec;
+	std::cout << *vec.begin() << std::endl;
     return (0);
 }
