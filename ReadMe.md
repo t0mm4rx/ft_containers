@@ -15,10 +15,10 @@ Vector work with a dynamic array: new T[size].
 Map is an associative array (key => value). It cannot have two pairs with the same key.
 We can use std::pair to store a pair key/value.
 It's implemented using a binary tree.
-## stack
+### stack
 Stack is a LIFO container. It can be built with other containers, such as list.
 We'll use a private property that will be a container (list by default), but it can be specified during instanciation.
-## queue
+### queue
 Queue is a FIFO container. As stack, we'll use an other container specified during instanciation to build it.
 ## ToDo
 ### list
