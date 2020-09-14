@@ -82,6 +82,56 @@ namespace ft
 			{
 				return (iterator(_container + _container_length));
 			}
+			void			reserve(size_type n)
+			{
+				if (n > _container_size)
+				{
+					size_type i = -1;
+					pointer	tmp;
+					tmp  = _allocator.allocate(n);
+					_container_size = n;
+					while (++i < _container_length)
+						tmp[i] = _container[i];
+					_allocator.deallocate(_container, _container_size);
+					_container = tmp;
+				}
+			}
+			void			push_back(const value_type &value)
+			{
+				if (_container_length + 1 > _container_size)
+					this->reserve(_container_length + 1);
+				_container[_container_length++] = value;
+			}
+			size_type		size(void) const
+			{
+				return (_container_length);
+			}
+			size_type		capacity(void) const
+			{
+				return (_container_size);
+			}
+			bool			empty(void) const
+			{
+				return (_container_length == 0);
+			}
+			iterator		insert(iterator position, const value_type &value)
+			{
+				size_type i = 0;
+				iterator it = begin();
+				while (it + i != position && i < _container_length)
+					i++;
+				if (_container_size < _container_length + 1)
+					reserve(_container_length + 1);
+				size_type j = _container_size - 1;
+				while (j > i)
+				{
+					_container[j] = _container[j - 1];
+					j--;
+				}
+				_container[i] = value;
+				_container_length++;
+				return (iterator(position));
+			}
 	};
 };
 

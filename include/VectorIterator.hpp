@@ -42,13 +42,13 @@ namespace ft
 			VectorIterator	operator++(int)
 			{
 				VectorIterator	tmp(*this);
-				*this++;
+				this->operator++();
 				return (tmp);
 			};
 			VectorIterator	operator--(int)
 			{
 				VectorIterator	tmp(*this);
-				*this--;
+				this->operator--();
 				return (tmp);
 			};
 			bool			operator==(const VectorIterator &other) const
@@ -99,26 +99,26 @@ namespace ft
 			{
 				while (n < 0)
 				{
-					*this--;
+					(*this)--;
 					n++;
 				}
 				while (n > 0)
 				{
-					*this++;
+					(*this)++;
 					n--;
 				}
 				return (*this);
 			};
 			VectorIterator	&operator-=(int n)
 			{
-				while (n < 0)
-				{
-					*this--;
-					n--;
-				}
 				while (n > 0)
 				{
-					*this++;
+					this->operator--();
+					n--;
+				}
+				while (n < 0)
+				{
+					this->operator++();
 					n++;
 				}
 				return (*this);

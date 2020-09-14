@@ -67,6 +67,10 @@ int main(void)
     std::cout << "-- map[\"mip\"]: " << map["mip"] << " --" << std::endl;
 
 	std::vector<int> vec;
-	std::cout << *vec.begin() << std::endl;
+	vec.push_back(1);
+	vec.push_back(2);
+	vec.push_back(3);
+	vec.resize(1);
+	std::cout << vec[0] << std::endl;
     return (0);
 }

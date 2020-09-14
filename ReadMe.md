@@ -9,6 +9,9 @@
 List works with a double linked-list.
 ### vector
 Vector work with a dynamic array: new T[size].
+_container is the array containing objects.
+_container_size is the size of _container in memory.
+_container_length is the number of elements in the array.
 ### map
 Map is an associative array (key => value). It cannot have two pairs with the same key.
 We can use std::pair to store a pair key/value.
@@ -59,22 +62,24 @@ Queue is a FIFO container. As stack, we'll use an other container specified duri
 - [x] constructor
 - [ ] destructor
 - [ ] operator=
-- [ ] begin
-- [ ] end
+- [x] begin
+- [x] end
+- [ ] begin const
+- [ ] end const
 - [ ] rbegin
 - [ ] rend
-- [ ] size
+- [x] size
 - [ ] max_size
 - [ ] resize
-- [ ] capacity
-- [ ] empty
-- [ ] reserve
-- [ ] operator[]
+- [x] capacity
+- [x] empty
+- [x] reserve
+- [x] operator[]
 - [ ] at
 - [ ] front
 - [ ] back
 - [ ] assign
-- [ ] push_back
+- [x] push_back
 - [ ] pop_back
 - [ ] insert
 - [ ] erase
