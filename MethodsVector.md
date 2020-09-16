@@ -59,7 +59,7 @@
 - [x] iterator erase (iterator first, iterator last);
 ## clear
 - [x] void clear();
-# swap
+## swap
 - [x] void swap(Vector &x);
 ## relational operators
 - [ ] template <class T, class Alloc> bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
