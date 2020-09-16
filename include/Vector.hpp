@@ -4,6 +4,7 @@
 # include <iostream>
 # include <memory>
 # include "VectorIterator.hpp"
+# include "Utils.hpp"
 
 namespace ft
 {
@@ -33,15 +34,6 @@ namespace ft
 			{
 				_container = _allocator.allocate(0);
 			};
-			explicit		Vector(size_type n, const_reference value = value_type(), const allocator_type &allocator = allocator_type())
-							:	_container_length(0),
-								_container_size(0),
-								_container(nullptr),
-								_allocator(allocator)
-			{
-				_container = _allocator.allocate(0);
-				this->assign(n, value);
-			};
 			template <class InputIterator>
 							Vector(InputIterator begin, InputIterator end, const allocator_type &allocator = allocator_type())
 							:	_container_length(0),
@@ -50,27 +42,44 @@ namespace ft
 								_allocator(allocator)
 			{
 				_container = _allocator.allocate(0);
-				this->assign(begin, end);
+				assign(begin, end);
+			};
+							Vector(size_type n, const_reference value = value_type(), const allocator_type &allocator = allocator_type())
+							:	_container_length(0),
+								_container_size(0),
+								_container(nullptr),
+								_allocator(allocator)
+			{
+				_container = _allocator.allocate(0);
+				assign(n, value);
 			};
 							Vector(const Vector &other)
+							:	_container_length(0),
+								_container_size(0),
+								_container(nullptr),
+								_allocator(other._allocator)
 			{
 				*this = other;
 			};
 							~Vector(void)
 			{
 			};
-			void			assign(size_type n, const_reference value)
+			Vector			&operator=(const Vector &other)
 			{
-				(void)n;
-				(void)value;
-			};
-			template <class InputIterator>
-			void			assign(InputIterator begin, InputIterator end)
-			{
-				(void)begin;
-				(void)end;
+				if (_container != nullptr)
+					_allocator.deallocate(_container, _container_size);
+				_allocator = other._allocator;
+				_container_size = 0;
+				_container_length = 0;
+				_container = _allocator.allocate(0);
+				assign(other.begin(), other.end());
+				return (*this);
 			};
 			reference		operator[](size_type n)
+			{
+				return (_container[n]);
+			};
+			const_reference	operator[](size_type n) const
 			{
 				return (_container[n]);
 			};
@@ -78,7 +87,15 @@ namespace ft
 			{
 				return (iterator(_container));
 			};
+			iterator		begin(void) const
+			{
+				return (iterator(_container));
+			};
 			iterator		end(void)
+			{
+				return (iterator(_container + _container_length));
+			};
+			iterator		end(void) const
 			{
 				return (iterator(_container + _container_length));
 			};
@@ -153,6 +170,86 @@ namespace ft
 					throw std::length_error("index out-of-bounds");
 				return _container[n];
 			};
+			const_reference	at(size_type n) const
+			{
+				if (n >= _container_length || n < 0)
+					throw std::length_error("index out-of-bounds");
+				return _container[n];
+			};
+			iterator		erase(iterator position)
+			{
+				iterator cursor = position;
+				while (cursor + 1 != end())
+				{
+					*cursor = *(cursor + 1);
+					cursor++;
+				}
+				_container_length--;
+				return (iterator(position));
+			};
+			iterator		erase(iterator begin, iterator end)
+			{
+				while (begin != end)
+				{
+					erase(begin);
+					end--;
+				}
+				return (iterator(begin));
+			};
+			void			clear(void)
+			{
+				erase(begin(), end());
+			};
+			template <class InputIterator>
+			void			assign(InputIterator first, InputIterator last)
+			{
+				clear();
+				insert(begin(), first, last);
+			};
+			void			assign(size_type n, const value_type &value)
+			{
+				clear();
+				insert(begin(), n, value);
+			};
+			reference		front(void)
+			{
+				return _container[0];
+			};
+			const_reference	front(void) const
+			{
+				return _container[0];
+			};
+			reference		back(void)
+			{
+				return _container[_container_length - 1];
+			};
+			const_reference	back(void) const
+			{
+				return _container[_container_length - 1];
+			};
+			void			pop_back(void)
+			{
+				if (_container_length)
+					_container_length--;
+			};
+			void			resize(size_type n, value_type value = value_type())
+			{
+				while (n < _container_length)
+					pop_back();
+				while (n > _container_length)
+					push_back(value);
+			};
+			void			swap(Vector &other)
+			{
+				ft::swap(_container, other._container);
+				ft::swap(_container_size, other._container_size);
+				ft::swap(_container_length, other._container_length);
+			};
+	};
+	template<class T, class Alloc>
+	void					swap(Vector<T, Alloc> &x, Vector<T, Alloc> &y)
+	{
+		x.swap(y);
 	};
 };
 

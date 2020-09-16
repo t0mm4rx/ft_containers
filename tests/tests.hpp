@@ -5,7 +5,6 @@
 # include <iostream>
 # include "../include/Vector.hpp"
 
-template <typename T>
 void	test_vector(void);
 
 #endif

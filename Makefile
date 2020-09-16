@@ -1,5 +1,5 @@
 TARGET=main
-FLAGS=-Wall -Werror -Wextra -g3 -fsanitize=address
+FLAGS=-Wall -Werror -Wextra -g3 -fsanitize=address -std=c++98
 
 SRC=${wildcard ./tests/*.cpp}
 OBJ=${SRC:%.cpp=%.o}

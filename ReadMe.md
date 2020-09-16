@@ -1,5 +1,5 @@
 # ft_containers
-## Researches
+## Research
 - http://www.cplusplus.com/reference/stl/
 - https://thispointer.com/difference-between-vector-and-list-in-c/
 - https://www.youtube.com/watch?v=qvZGUFHWChY
