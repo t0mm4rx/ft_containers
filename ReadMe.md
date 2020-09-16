@@ -59,7 +59,10 @@ Queue is a FIFO container. As stack, we'll use an other container specified duri
 - [ ] operator>=
 - [ ] operator>
 ### vector
-- [x] constructor
+- [x] empty constructor
+- [x] fill constructor
+- [x] range constructor
+- [x] copy constructor
 - [ ] destructor
 - [ ] operator=
 - [x] begin
@@ -68,21 +71,28 @@ Queue is a FIFO container. As stack, we'll use an other container specified duri
 - [ ] end const
 - [ ] rbegin
 - [ ] rend
+- [ ] rbegin const
+- [ ] rend const
 - [x] size
-- [ ] max_size
+- [x] max_size
 - [ ] resize
 - [x] capacity
 - [x] empty
 - [x] reserve
 - [x] operator[]
 - [ ] at
+- [ ] at const
 - [ ] front
 - [ ] back
-- [ ] assign
+- [ ] range assign
+- [ ] fill assign
 - [x] push_back
 - [ ] pop_back
-- [ ] insert
-- [ ] erase
+- [x] single element insert
+- [x] fill insert
+- [x] range insert
+- [ ] single element erase
+- [ ] range erase
 - [ ] swap
 - [ ] clear
 - [ ] operator!=

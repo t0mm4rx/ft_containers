@@ -77,11 +77,11 @@ namespace ft
 			iterator		begin(void)
 			{
 				return (iterator(_container));
-			}
+			};
 			iterator		end(void)
 			{
 				return (iterator(_container + _container_length));
-			}
+			};
 			void			reserve(size_type n)
 			{
 				if (n > _container_size)
@@ -95,25 +95,25 @@ namespace ft
 					_allocator.deallocate(_container, _container_size);
 					_container = tmp;
 				}
-			}
+			};
 			void			push_back(const value_type &value)
 			{
 				if (_container_length + 1 > _container_size)
-					this->reserve(_container_length + 1);
+					reserve(_container_length + 1);
 				_container[_container_length++] = value;
-			}
+			};
 			size_type		size(void) const
 			{
 				return (_container_length);
-			}
+			};
 			size_type		capacity(void) const
 			{
 				return (_container_size);
-			}
+			};
 			bool			empty(void) const
 			{
 				return (_container_length == 0);
-			}
+			};
 			iterator		insert(iterator position, const value_type &value)
 			{
 				size_type i = 0;
@@ -130,8 +130,29 @@ namespace ft
 				}
 				_container[i] = value;
 				_container_length++;
-				return (iterator(position));
-			}
+				return (iterator(&_container[i]));
+			};
+			void			insert(iterator position, size_type n, const value_type &value)
+			{
+				while (n--)
+					position = insert(position, value);
+			};
+			template <class InputIterator>
+			void			insert(iterator position, InputIterator begin, InputIterator end)
+			{
+				while (begin != end)
+					position = insert(position, *(begin++)) + 1;
+			};
+			size_type		max_size(void) const
+			{
+				return (std::numeric_limits<size_type>::max() / sizeof(value_type));
+			};
+			reference		at(size_type n)
+			{
+				if (n >= _container_length || n < 0)
+					throw std::length_error("index out-of-bounds");
+				return _container[n];
+			};
 	};
 };
 

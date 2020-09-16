@@ -1,9 +1,16 @@
 TARGET=main
+FLAGS=-Wall -Werror -Wextra -g3 -fsanitize=address
+
+SRC=${wildcard ./tests/*.cpp}
+OBJ=${SRC:%.cpp=%.o}
 
 all: ${TARGET}
 
-${TARGET}:
-	clang++ -Werror -Wextra -Wall -fsanitize=address -g3 main.cpp -o ${TARGET}
+./tests/%.o: ./tests/%.cpp
+	clang++ ${FLAGS} -c $< -o $@
+
+${TARGET}: ${OBJ}
+	clang++ ${FLAGS} ${OBJ} -o ${TARGET}
 	./${TARGET}
 
 test:
@@ -14,6 +21,7 @@ clean:
 	rm -rf *.dSYM
 
 fclean: clean
+	rm -rf ${OBJ}
 	rm -rf ${TARGET} ${TARGET}_test
 
 re: fclean all
