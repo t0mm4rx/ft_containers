@@ -29,7 +29,7 @@ namespace ft
 			explicit		Vector(const allocator_type &allocator = allocator_type())
 							:	_container_length(0),
 								_container_size(0),
-								_container(nullptr),
+								_container(0),
 								_allocator(allocator)
 			{
 				_container = _allocator.allocate(0);
@@ -38,7 +38,7 @@ namespace ft
 							Vector(InputIterator begin, InputIterator end, const allocator_type &allocator = allocator_type())
 							:	_container_length(0),
 								_container_size(0),
-								_container(nullptr),
+								_container(0),
 								_allocator(allocator)
 			{
 				_container = _allocator.allocate(0);
@@ -47,7 +47,7 @@ namespace ft
 							Vector(size_type n, const_reference value = value_type(), const allocator_type &allocator = allocator_type())
 							:	_container_length(0),
 								_container_size(0),
-								_container(nullptr),
+								_container(0),
 								_allocator(allocator)
 			{
 				_container = _allocator.allocate(0);
@@ -56,7 +56,7 @@ namespace ft
 							Vector(const Vector &other)
 							:	_container_length(0),
 								_container_size(0),
-								_container(nullptr),
+								_container(0),
 								_allocator(other._allocator)
 			{
 				*this = other;
@@ -66,7 +66,7 @@ namespace ft
 			};
 			Vector			&operator=(const Vector &other)
 			{
-				if (_container != nullptr)
+				if (_container != 0)
 					_allocator.deallocate(_container, _container_size);
 				_allocator = other._allocator;
 				_container_size = 0;
