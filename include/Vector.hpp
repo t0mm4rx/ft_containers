@@ -64,6 +64,7 @@ namespace ft
 			};
 							~Vector(void)
 			{
+				_allocator.deallocate(_container, _container_size);
 			};
 			Vector			&operator=(const Vector &other)
 			{
