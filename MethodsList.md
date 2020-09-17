@@ -1,17 +1,17 @@
 # List
 ## (constructor)
-- [ ] explicit list (const allocator_type& alloc = allocator_type());
-- [ ] explicit list (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type());
-- [ ] template <class InputIterator> list (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
-- [ ] list (const list& x);
+- [x] explicit list (const allocator_type& alloc = allocator_type());
+- [x] explicit list (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type());
+- [x] template <class InputIterator> list (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
+- [x] list (const list& x);
 ## (destructor)
 ## operator=
 - [ ] list& operator= (const list& x);
 ## begin
-- [ ] iterator begin()
+- [x] iterator begin()
 - [ ] const_iterator begin() const;
 ## end
-- [ ] iterator end()
+- [x] iterator end()
 - [ ] const_iterator end() const;
 ## rbegin
 - [ ] reverse_iterator rbegin()
@@ -20,28 +20,28 @@
 - [ ] reverse_iterator rend()
 - [ ] const_reverse_iterator rend() const;
 ## empty
-- [ ] bool empty() const;
+- [x] bool empty() const;
 ## size
-- [ ] size_type size() const;
+- [x] size_type size() const;
 ## max_size
-- [ ] size_type max_size() const;
+- [x] size_type max_size() const;
 ## front
-- [ ] reference front()
-- [ ] const_reference front() const;
+- [x] reference front()
+- [x] const_reference front() const;
 ## back
-- [ ] reference back()
-- [ ] const_reference back() const;
+- [x] reference back()
+- [x] const_reference back() const;
 ## assign
-- [ ] template <class InputIterator> void assign (InputIterator first, InputIterator last);
-- [ ] void assign (size_type n, const value_type& val);
+- [x] template <class InputIterator> void assign (InputIterator first, InputIterator last);
+- [x] void assign (size_type n, const value_type& val);
 ## push_front
-- [ ] void push_front (const value_type& val);
+- [x] void push_front (const value_type& val);
 ## pop_front
-- [ ] void pop_front();
+- [x] void pop_front();
 ## push_back
-- [ ] void push_back (const value_type& val);
+- [x] void push_back (const value_type& val);
 ## pop_back
-- [ ] void pop_back();
+- [x] void pop_back();
 ## insert
 - [ ] iterator insert (iterator position, const value_type& val);
 - [ ] void insert (iterator position, size_type n, const value_type& val);
@@ -50,11 +50,11 @@
 - [ ] iterator erase (iterator position)
 - [ ] iterator erase (iterator first, iterator last);
 ## swap
-- [ ] void swap (list& x);
+- [x] void swap (list& x);
 ## resize
 - [ ] void resize (size_type n, value_type val = value_type());
 ## clear
-- [ ] void clear();
+- [x] void clear();
 ## splice
 - [ ] void splice (iterator position, list& x);
 - [ ] void splice (iterator position, list& x, iterator i);
@@ -70,12 +70,10 @@
 - [ ] void merge (list& x);
 - [ ] template <class Compare> void merge (list& x, Compare comp);
 ## sort
-- [ ] void sort();
-- [ ] template <class Compare> void sort (Compare comp);
+- [x] void sort();
+- [x] template <class Compare> void sort (Compare comp);
 ## reverse
-- [ ] void reverse();
-## get_allocator
-- [ ] allocator_type get_allocator() const;
+- [x] void reverse();
 ## relational operators (list)
 ## swap (list)
-- [ ] template <class T, class Alloc> void swap (list<T,Alloc>& x, list<T,Alloc>& y);
+- [x] template <class T, class Alloc> void swap (list<T,Alloc>& x, list<T,Alloc>& y);
