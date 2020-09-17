@@ -20,6 +20,9 @@ namespace ft
 			typedef			T* pointer;
 			typedef			const T* const_pointer;
 			typedef			ft::VectorIterator<T> iterator;
+			typedef			ft::ConstVectorIterator<T> const_iterator;
+			typedef			ft::ReverseVectorIterator<T> reverse_iterator;
+			typedef			ft::ConstReverseVectorIterator<T> const_reverse_iterator;
 			typedef			unsigned long size_type;
 		private:
 			size_type		_container_length;
@@ -89,17 +92,37 @@ namespace ft
 			{
 				return (iterator(_container));
 			};
-			iterator		begin(void) const
+			const_iterator	begin(void) const
 			{
-				return (iterator(_container));
+				return (const_iterator(_container));
 			};
 			iterator		end(void)
 			{
 				return (iterator(_container + _container_length));
 			};
-			iterator		end(void) const
+			const_iterator		end(void) const
 			{
-				return (iterator(_container + _container_length));
+				return (const_iterator(_container + _container_length));
+			};
+			reverse_iterator
+							rbegin(void)
+			{
+				return (reverse_iterator(_container + _container_length - 1));
+			};
+			const_reverse_iterator
+							rbegin(void) const
+			{
+				return (const_reverse_iterator(_container + _container_length - 1));
+			};
+			reverse_iterator
+							rend(void)
+			{
+				return (reverse_iterator(_container - 1));
+			};
+			const_reverse_iterator
+							rend(void) const
+			{
+				return (const_reverse_iterator(_container - 1));
 			};
 			void			reserve(size_type n)
 			{
@@ -248,11 +271,66 @@ namespace ft
 				ft::swap(_container_length, other._container_length);
 			};
 	};
-	template<class T, class Alloc>
+	template <class T, class Alloc>
 	void					swap(Vector<T, Alloc> &x, Vector<T, Alloc> &y)
 	{
 		x.swap(y);
 	};
+	template<class T, class Alloc>
+	bool					operator==(const Vector<T, Alloc> &a, const Vector<T, Alloc> &b)
+	{
+		if (a.size() != b.size())
+			return (false);
+		unsigned long i = -1;
+		while (++i < a.size())
+		{
+			if (a[i] != b[i])
+				return (false);
+		}
+		return (true);
+	};
+	template<class T, class Alloc>
+	bool					operator!=(const Vector<T, Alloc> &a, const Vector<T, Alloc> &b)
+	{
+		return (!(a == b));
+	};
+	template <class T, class Alloc>
+	bool					operator<(const Vector<T,Alloc> &a, const Vector<T,Alloc> &b)
+	{
+		size_t		i;
+		size_t		n;
+
+		if (a.size() > b.size())
+			n = b.size();
+		else
+			n = a.size();
+		i = 0;
+		while (i < n)
+		{
+			if (a.at(i) != b.at(i))
+				return (a.at(i) < b.at(i));
+			i++;
+		}
+		return (a.size() < b.size());
+	}
+
+	template <class T, class Alloc>
+	bool					operator<=(const Vector<T,Alloc> &a, const Vector<T,Alloc> &b)
+	{
+		return (a < b || a == b);
+	}
+
+	template <class T, class Alloc>
+	bool					operator>(const Vector<T,Alloc> &a, const Vector<T,Alloc> &b)
+	{
+		return (!(a < b) && !(a == b));
+	}
+
+	template <class T, class Alloc>
+	bool					operator>=(const Vector<T,Alloc> &a, const Vector<T,Alloc> &b)
+	{
+		return (!(a < b));
+	}
 };
 
 #endif

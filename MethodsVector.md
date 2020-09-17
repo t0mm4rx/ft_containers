@@ -9,16 +9,16 @@
 - [x] vector& operator= (const vector& x);
 ## begin
 - [x] iterator begin()
-- [ ] const_iterator begin() const;
+- [x] const_iterator begin() const;
 ## end
 - [x] iterator end()
-- [ ] const_iterator end() const;
+- [x] const_iterator end() const;
 ## rbegin
-- [ ] reverse_iterator rbegin()
-- [ ] const_reverse_iterator rbegin() const;
+- [x] reverse_iterator rbegin()
+- [x] const_reverse_iterator rbegin() const;
 ## rend
-- [ ] reverse_iterator rend()
-- [ ] const_reverse_iterator rend() const;
+- [x] reverse_iterator rend()
+- [x] const_reverse_iterator rend() const;
 ## size
 - [x] size_type size() const;
 ## max_size
@@ -62,11 +62,11 @@
 ## swap
 - [x] void swap(Vector &x);
 ## relational operators
-- [ ] template <class T, class Alloc> bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
-- [ ] template <class T, class Alloc> bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
-- [ ] template <class T, class Alloc> bool operator< (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
-- [ ] template <class T, class Alloc> bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
-- [ ] template <class T, class Alloc> bool operator> (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
-- [ ] template <class T, class Alloc> bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+- [x] template <class T, class Alloc> bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+- [x] template <class T, class Alloc> bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+- [x] template <class T, class Alloc> bool operator< (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+- [x] template <class T, class Alloc> bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+- [x] template <class T, class Alloc> bool operator> (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+- [x] template <class T, class Alloc> bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
 ## swap
 - [x] template <class T, class Alloc> void swap (vector<T,Alloc>& x, vector<T,Alloc>& y);

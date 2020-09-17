@@ -17,6 +17,23 @@ void print_vector(T vec)
 	std::cout << std::endl;
 }
 
+template <typename T>
+void print_vector_reverse(T vec)
+{
+	typename T::reverse_iterator it;
+
+	std::cout << "size " << vec.size() << ": ";
+	it = vec.rbegin();
+	while (it != vec.rend())
+	{
+		std::cout << *it;
+		if (it + 1 != vec.rend())
+			std::cout << " - ";
+		++it;
+	}
+	std::cout << std::endl;
+}
+
 void	test_vector(void)
 {
 	// Default constructor
@@ -123,4 +140,46 @@ void	test_vector(void)
 	swap(vec3, vec4);
 	print_vector(vec3);
 	print_vector(vec4);
+
+	// Reverse iterator
+	std::cout << "Reverse iterator:" << std::endl;
+	print_vector_reverse(vec4);
+
+	// Const iterator
+	std::cout << "Const iterator:" << std::endl;
+	ft::Vector<int>::const_iterator cit = const_cast<const ft::Vector<int>& >(vec4).begin();
+	std::cout << *cit << std::endl;
+	cit++;
+	std::cout << *cit << std::endl;
+	cit += 3;
+	std::cout << *cit << std::endl;
+
+	// Const revserse iterator
+	std::cout << "Const reverse iterator:" << std::endl;
+	ft::Vector<int>::const_reverse_iterator crit = const_cast<const ft::Vector<int>& >(vec4).rbegin();
+	std::cout << *crit << std::endl;
+	crit += 8;
+	std::cout << *crit << std::endl;
+	crit++;
+	std::cout << *crit << std::endl;
+
+	// Operator ==
+	std::cout << "vec4 == vec: " << (vec4 == vec) << std::endl;
+	vec4.push_back(2);
+	std::cout << "vec4 == vec: " << (vec4 == vec) << std::endl;
+	vec = vec4;
+	std::cout << "vec4 == vec: " << (vec4 == vec) << std::endl;
+	vec[3] = -1;
+	std::cout << "vec4 == vec: " << (vec4 == vec) << std::endl;
+	vec.clear();
+	vec4.clear();
+	std::cout << "vec4 == vec: " << (vec4 == vec) << std::endl;
+
+	// Operator >, <
+	vec.push_back(1);
+	std::cout << "vec4 > vec: " << (vec4 > vec) << std::endl;
+	std::cout << "vec4 < vec: " << (vec4 < vec) << std::endl;
+	vec4.push_back(2);
+	std::cout << "vec4 > vec: " << (vec4 > vec) << std::endl;
+	std::cout << "vec4 < vec: " << (vec4 < vec) << std::endl;
 }
