@@ -1,5 +1,6 @@
 #include "tests.hpp"
 #include <list>
+#include <stdlib.h>
 
 template <class T>
 void print_list(T &list)
