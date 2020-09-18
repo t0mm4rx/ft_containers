@@ -91,6 +91,7 @@ namespace ft
 			{
 				clear();
 				assign(other.begin(), other.end());
+				_length = other._length;
 				return (*this);
 			};
 			iterator begin(void) {
@@ -377,6 +378,52 @@ namespace ft
 	void swap(List<T, Alloc> &x, List<T, Alloc> &y)
 	{
 		x.swap(y);
+	};
+	template<typename T>
+	bool operator==(List<T> const &lhs, List<T> const &rhs) {
+		if (lhs.size() != rhs.size())
+			return (false);
+		typename List<T>::const_iterator cur1 = lhs.begin();
+		typename List<T>::const_iterator cur2 = rhs.begin();
+		while (cur1 != lhs.end())
+		{
+			if (*(cur1++) != *(cur2++))
+				return (false);
+		}
+		return (true);
+	};
+	template<typename T>
+	bool operator!=(List<T> const &lhs, List<T> const &rhs) {
+		return (!(lhs == rhs));
+	};
+	template<typename T>
+	bool operator<(List<T> const &lhs, List<T> const &rhs) {
+		if (lhs.size() < rhs.size())
+			return (true);
+		if (lhs.size() > rhs.size())
+			return (false);
+		typename List<T>::const_iterator cur1 = lhs.begin();
+		typename List<T>::const_iterator cur2 = rhs.begin();
+		while (cur1 != lhs.end())
+		{
+			if (*cur1 != *cur2)
+				return (*cur1 < *cur2);
+			cur1++;
+			cur2++;
+		}	
+		return (false);
+	};
+	template<typename T>
+	bool operator<=(List<T> const &lhs, List<T> const &rhs) {
+		return (!(rhs < lhs));
+	};
+	template<typename T>
+	bool operator>(List<T> const &lhs, List<T> const &rhs) {
+		return (rhs < lhs);
+	};
+	template<typename T>
+	bool operator>=(List<T> const &lhs, List<T> const &rhs) {
+		return (!(lhs < rhs));
 	};
 };
 

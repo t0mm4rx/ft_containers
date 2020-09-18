@@ -56,9 +56,9 @@
 ## clear
 - [x] void clear();
 ## splice
-- [ ] void splice (iterator position, list& x);
-- [ ] void splice (iterator position, list& x, iterator i);
-- [ ] void splice (iterator position, list& x, iterator first, iterator last);
+- [x] void splice (iterator position, list& x);
+- [x] void splice (iterator position, list& x, iterator i);
+- [x] void splice (iterator position, list& x, iterator first, iterator last);
 ## remove
 - [x] void remove (const value_type& val);
 ## remove_if
@@ -75,5 +75,11 @@
 ## reverse
 - [x] void reverse();
 ## relational operators (list)
+- [x] template <class T, class Alloc> bool operator== (const list<T,Alloc>& lhs, const list<T,Alloc>& rhs);
+- [x] template <class T, class Alloc> bool operator!= (const list<T,Alloc>& lhs, const list<T,Alloc>& rhs);
+- [x] template <class T, class Alloc> bool operator<  (const list<T,Alloc>& lhs, const list<T,Alloc>& rhs);
+- [x] template <class T, class Alloc> bool operator<= (const list<T,Alloc>& lhs, const list<T,Alloc>& rhs);
+- [x] template <class T, class Alloc> bool operator>  (const list<T,Alloc>& lhs, const list<T,Alloc>& rhs);
+- [x] template <class T, class Alloc> bool operator>= (const list<T,Alloc>& lhs, const list<T,Alloc>& rhs);
 ## swap (list)
 - [x] template <class T, class Alloc> void swap (list<T,Alloc>& x, list<T,Alloc>& y);

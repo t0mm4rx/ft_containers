@@ -232,4 +232,23 @@ void test_list(void)
 	l.splice(l.begin() + 1, p, p.begin() + 1);
 	print_list(l);
 	print_list(p);
+
+	// Operator
+	std::cout << "Operators" << std::endl;
+	list2 = a;
+	print_list(list2);
+	print_list(a);
+	std::cout << "list2 == a: " << (list2 == a) << std::endl;
+	std::cout << "list2 > a: " << (list2 > a) << std::endl;
+	std::cout << "list2 < a: " << (list2 < a) << std::endl;
+	std::cout << "list2 <= a: " << (list2 <= a) << std::endl;
+	std::cout << "list2 >= a: " << (list2 >= a) << std::endl;
+	a.push_back(42);
+	print_list(list2);
+	print_list(a);
+	std::cout << "list2 == a: " << (list2 == a) << std::endl;
+	std::cout << "list2 > a: " << (list2 > a) << std::endl;
+	std::cout << "list2 < a: " << (list2 < a) << std::endl;
+	std::cout << "list2 <= a: " << (list2 <= a) << std::endl;
+	std::cout << "list2 >= a: " << (list2 >= a) << std::endl;
 }
