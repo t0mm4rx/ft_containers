@@ -20,6 +20,9 @@ namespace ft
 			typedef unsigned long size_type;
 			typedef Node<value_type>* node;
 			typedef ListIterator<value_type> iterator;
+			typedef ConstListIterator<value_type> const_iterator;
+			typedef ReverseListIterator<value_type> reverse_iterator;
+			typedef ConstReverseListIterator<value_type> const_reverse_iterator;
 		private:
 			node _list_begin;
 			node _list_end;
@@ -39,8 +42,19 @@ namespace ft
 				_list_end = _new_node(value_type(), _list_begin, 0);
 				_list_begin->next = _list_end;
 			};
+			template <typename N>
 			struct _Smaller {
-				bool operator()(const int &a, const int &b) {return a > b;}
+				bool operator()(const N &a, const N &b)
+				{
+					return a > b;
+				};
+			};
+			template <typename N>
+			struct _Equal {
+				bool operator()(const N &a, const N &b)
+				{
+					return a == b;
+				};
 			};
 		public:
 			explicit List(const allocator_type &alloc=allocator_type())
@@ -82,19 +96,27 @@ namespace ft
 			iterator begin(void) {
 				return (iterator(_list_begin->next));
 			};
-			iterator begin(void) const {
-				return (iterator(_list_begin->next));
+			const_iterator begin(void) const {
+				return (const_iterator(_list_begin->next));
 			};
 			iterator end(void) {
 				return (iterator(_list_end));
 			};
-			iterator end(void) const {
-				return (iterator(_list_end));
+			const_iterator end(void) const {
+				return (const_iterator(_list_end));
 			};
-			// reverse_iterator rbegin(void) {};
-			// const_reverse_iterator rbegin(void) const {};
-			// reverse_iterator rend(void) {};
-			// const_reverse_iterator rend(void) const {};
+			reverse_iterator rbegin(void) {
+				return (reverse_iterator(_list_end->prev));
+			};
+			const_reverse_iterator rbegin(void) const {
+				return (const_reverse_iterator(_list_end->prev));
+			};
+			reverse_iterator rend(void) {
+				return (reverse_iterator(_list_begin));
+			};
+			const_reverse_iterator rend(void) const {
+				return (const_reverse_iterator(_list_begin));
+			};
 			bool empty(void) const
 			{
 				return (_length == 0);
@@ -147,6 +169,7 @@ namespace ft
 				delete _list_begin->next;
 				_list_begin->next = next;
 				next->prev = _list_begin;
+				_length--;
 			};
 			void push_back(const value_type &value)
 			{
@@ -161,18 +184,68 @@ namespace ft
 				delete _list_end->prev;
 				before->next = _list_end;
 				_list_end->prev = before;
+				_length--;
 			};
-			// iterator insert(iterator position, const value_type &value)
-			// {};
-			// void insert(iterator position, const value_type &value)
-			// {};
-			// template <class InputIterator>
-			// void insert(iterator position, InputIterator first, InputIterator last)
-			// {};
-			// iterator erase(iterator position)
-			// {};
-			// iterator erase(iterator first, iterator last)
-			// {};
+			iterator insert(iterator position, const value_type &value)
+			{
+				if (position == begin())
+				{
+					push_front(value);
+					return (begin());
+				}
+				if (position == end())
+				{
+					push_back(value);
+					return (end());
+				}
+				node after = position.node();
+				node before = after->prev;
+				node el = _new_node(value, before, after);
+				before->next = el;
+				after->prev = el;
+				return (iterator(el));
+			};
+			void insert(iterator position, size_type n, const value_type &value)
+			{
+				while (n--)
+					position = insert(position, value);
+			};
+			template <class InputIterator>
+			void insert(iterator position, InputIterator first, InputIterator last)
+			{
+				while (first != last)
+				{
+					position = insert(position, *(first++));
+					if (position != end())
+						position++;
+				}
+			};
+			iterator erase(iterator position)
+			{
+				if (position == begin())
+				{
+					pop_front();
+					return (begin());
+				}
+				if (position == end())
+				{
+					pop_back();
+					return (end());
+				}
+				node next = position.node()->next;
+				node previous = position.node()->prev;
+				delete position.node();
+				previous->next = next;
+				next->prev = previous;
+				_length--;
+				return (iterator(next));
+			};
+			iterator erase(iterator first, iterator last)
+			{
+				while (first != last)
+					erase(first++);
+				return (first);
+			};
 			void swap(List &x)
 			{
 				ft::swap(x._length, _length);
@@ -181,8 +254,10 @@ namespace ft
 			};
 			void resize(size_type n, value_type value = value_type())
 			{
-				(void)n;
-				(void)value;
+				while (n < _length)
+					pop_back();
+				while (n > _length)
+					push_back(value);
 			};
 			void clear(void)
 			{
@@ -195,42 +270,82 @@ namespace ft
 				}
 				_list_begin->next = _list_end;
 				_list_end->prev = _list_begin;
+				_length = 0;
 			};
-			// void splice(iterator position, List &x)
-			// {};
-			// void splice(iterator position, List &x, iterator i)
-			// {};
-			// void splice(iterator position, List &x, iterator first, iterator last)
-			// {};
+			void splice(iterator position, List &x)
+			{
+				splice(position, x, x.begin(), x.end());
+			};
+			void splice(iterator position, List &x, iterator i)
+			{
+				insert(position, *i);
+				x.erase(i);
+			};
+			void splice(iterator position, List &x, iterator first, iterator last)
+			{
+				insert(position, first, last);
+				x.erase(first, last);
+			};
 			void remove(const value_type &value)
 			{
-				(void)value;
+				iterator c = begin();
+				while (c != end())
+				{
+					if (*c == value)
+						c = erase(c);
+					else
+						c++;
+				}
 			};
 			template <class Predicate>
 			void remove_if(Predicate pred)
 			{
-				(void)pred;
+				iterator c = begin();
+				while (c != end())
+				{
+					if (*pred(*c))
+						c = erase(c);
+					else
+						c++;
+				}
 			};
 			void unique(void)
-			{};
+			{
+				unique(_Equal<value_type>());
+			};
 			template <class BinaryPredicate>
 			void unique(BinaryPredicate binary_pred)
 			{
-				(void)binary_pred;
+				iterator cur = begin();
+				iterator next;
+				while (cur + 1 != end())
+				{
+					next = cur + 1;
+					while (binary_pred(*cur, *next))
+						erase(next++);
+						cur++;
+				}
 			};
 			void merge(List &x)
 			{
-				(void)x;
+				if (&x == this)
+					return;
+				insert(end(), x.begin(), x.end());
+				x.clear();
+				sort();
 			};
 			template <class Compare>
 			void merge(List &x, Compare comp)
 			{
-				(void)x;
-				(void)comp;
+				if (&x == this)
+					return;
+				insert(end(), x.begin(), x.end());
+				x.clear();
+				sort(comp);
 			};
 			void sort(void)
 			{
-				sort(_Smaller());
+				sort(_Smaller<value_type>());
 			};
 			template <class Compare>
 			void sort(Compare comp)
