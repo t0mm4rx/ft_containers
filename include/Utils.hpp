@@ -19,6 +19,15 @@ namespace ft
 		Node *prev;
 		Node *next;
 	};
+	template <class Key, class T>
+	struct BNode
+	{
+		bool root;
+		Key key;
+		T value;
+		BNode *left;
+		BNode *right;
+	};
 };
 
 #endif

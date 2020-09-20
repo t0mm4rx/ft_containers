@@ -6,7 +6,8 @@
 int main(void)
 {
 	// test_vector();
-	test_list();
+	// test_list();
+	test_map();
 
 	return (0);
 }

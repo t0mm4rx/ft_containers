@@ -1,9 +1,10 @@
 # Map
 ## (constructor)
-- [ ] explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
+- [x] explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
 - [ ] template <class InputIterator> map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
-- [ ] map (const map& x);
+- [x] map (const map& x);
 ## (destructor)
+- [x] ~map (void);
 ## operator=
 - [ ] map& operator= (const map& x);
 ## begin
@@ -19,11 +20,11 @@
 - [ ] reverse_iterator rend()
 - [ ] const_reverse_iterator rend() const;
 ## empty
-- [ ] bool empty() const;
+- [x] bool empty() const;
 ## size
-- [ ] size_type size() const;
+- [x] size_type size() const;
 ## max_size
-- [ ] size_type max_size() const;
+- [x] size_type max_size() const;
 ## operator[]
 - [ ] mapped_type& operator[] (const key_type& k);
 ## insert
@@ -35,12 +36,13 @@
 - [ ] size_type erase (const key_type& k);
 - [ ] void erase (iterator first, iterator last);
 ## swap
+- [ ] void swap (map& x);
 ## clear
 - [ ] void clear();
 ## key_comp
-- [ ] key_compare key_comp() const;
+- [x] key_compare key_comp() const;
 ## value_comp
-- [ ] value_compare value_comp() const;
+- [x] value_compare value_comp() const;
 ## find
 - [ ] iterator find (const key_type& k)
 - [ ] const_iterator find (const key_type& k) const;
