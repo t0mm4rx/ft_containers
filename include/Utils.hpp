@@ -22,11 +22,10 @@ namespace ft
 	template <class Key, class T>
 	struct BNode
 	{
-		bool root;
-		Key key;
-		T value;
+		std::pair<Key, T> pair;
 		BNode *left;
 		BNode *right;
+		BNode *parent;
 	};
 };
 

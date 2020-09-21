@@ -1,17 +1,17 @@
 # Map
 ## (constructor)
 - [x] explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
-- [ ] template <class InputIterator> map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
+- [x] template <class InputIterator> map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
 - [x] map (const map& x);
 ## (destructor)
 - [x] ~map (void);
 ## operator=
-- [ ] map& operator= (const map& x);
+- [x] map& operator= (const map& x);
 ## begin
-- [ ] iterator begin()
+- [x] iterator begin()
 - [ ] const_iterator begin() const;
 ## end
-- [ ] iterator end()
+- [x] iterator end()
 - [ ] const_iterator end() const;
 ## rbegin
 - [ ] reverse_iterator rbegin()
@@ -26,11 +26,11 @@
 ## max_size
 - [x] size_type max_size() const;
 ## operator[]
-- [ ] mapped_type& operator[] (const key_type& k);
+- [x] mapped_type& operator[] (const key_type& k);
 ## insert
-- [ ] pair<iterator,bool> insert (const value_type& val);
-- [ ] iterator insert (iterator position, const value_type& val);
-- [ ] template <class InputIterator> void insert (InputIterator first, InputIterator last);
+- [x] pair<iterator,bool> insert (const value_type& val);
+- [x] iterator insert (iterator position, const value_type& val);
+- [x] template <class InputIterator> void insert (InputIterator first, InputIterator last);
 ## erase
 - [ ] void erase (iterator position);
 - [ ] size_type erase (const key_type& k);
@@ -38,16 +38,16 @@
 ## swap
 - [ ] void swap (map& x);
 ## clear
-- [ ] void clear();
+- [x] void clear();
 ## key_comp
 - [x] key_compare key_comp() const;
 ## value_comp
 - [x] value_compare value_comp() const;
 ## find
-- [ ] iterator find (const key_type& k)
+- [x] iterator find (const key_type& k)
 - [ ] const_iterator find (const key_type& k) const;
 ## count
-- [ ] size_type count (const key_type& k) const;
+- [x] size_type count (const key_type& k) const;
 ## lower_bound
 - [ ] iterator lower_bound (const key_type& k)
 - [ ] const_iterator lower_bound (const key_type& k) const;
@@ -57,5 +57,3 @@
 ## equal_range
 - [ ] pair<const_iterator,const_iterator> equal_range (const key_type& k) const
 - [ ] pair<iterator,iterator> equal_range (const key_type& k);
-## get_allocator
-- [ ] allocator_type get_allocator() const;
