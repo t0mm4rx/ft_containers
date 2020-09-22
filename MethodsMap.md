@@ -9,16 +9,16 @@
 - [x] map& operator= (const map& x);
 ## begin
 - [x] iterator begin()
-- [ ] const_iterator begin() const;
+- [x] const_iterator begin() const;
 ## end
 - [x] iterator end()
-- [ ] const_iterator end() const;
+- [x] const_iterator end() const;
 ## rbegin
-- [ ] reverse_iterator rbegin()
-- [ ] const_reverse_iterator rbegin() const;
+- [x] reverse_iterator rbegin()
+- [x] const_reverse_iterator rbegin() const;
 ## rend
-- [ ] reverse_iterator rend()
-- [ ] const_reverse_iterator rend() const;
+- [x] reverse_iterator rend()
+- [x] const_reverse_iterator rend() const;
 ## empty
 - [x] bool empty() const;
 ## size
@@ -50,10 +50,10 @@
 - [x] size_type count (const key_type& k) const;
 ## lower_bound
 - [x] iterator lower_bound (const key_type& k)
-- [ ] const_iterator lower_bound (const key_type& k) const;
+- [x] const_iterator lower_bound (const key_type& k) const;
 ## upper_bound
 - [x] iterator upper_bound (const key_type& k)
-- [ ] const_iterator upper_bound (const key_type& k) const;
+- [x] const_iterator upper_bound (const key_type& k) const;
 ## equal_range
-- [ ] pair<const_iterator,const_iterator> equal_range (const key_type& k) const
+- [x] pair<const_iterator,const_iterator> equal_range (const key_type& k) const
 - [x] pair<iterator,iterator> equal_range (const key_type& k);

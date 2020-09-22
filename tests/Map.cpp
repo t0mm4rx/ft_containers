@@ -23,9 +23,6 @@ void test_map(void)
 	map.insert(std::make_pair("b", 4));
 	map.insert(std::make_pair("b", -2));
 
-	// map.test();
-	// return;
-
 	std::cout << map.find("test")->second << std::endl;
 	std::cout << map.find("a")->second << std::endl;
 	std::cout << map.find("b")->second << std::endl;
@@ -96,9 +93,26 @@ void test_map(void)
 	--it;
 	std::cout << it->first << std::endl;
 
-	// std::map<std::string, int> t;
-	// t["test"] = 4;
-	// std::map<std::string, int>::iterator i = t.end();
-	// --i;
-	// std::cout << i->first << std::endl;
+	std::cout << "Reverse iterator" << std::endl;
+	ft::Map<std::string, int>::reverse_iterator rit = map.rbegin();
+	while (rit != map.rend())
+	{
+		std::cout << rit->first << std::endl;
+		++rit;
+	}
+	
+	std::cout << "Operators" << std::endl;
+	test = map;
+	std::cout << "test == map: " << (test == map) << std::endl;
+	std::cout << "test > map: " << (test > map) << std::endl;
+	std::cout << "test < map: " << (test < map) << std::endl;
+	std::cout << "test <= map: " << (test <= map) << std::endl;
+	std::cout << "test >= map: " << (test >= map) << std::endl;
+	std::cout << "test['test'] = 42" << std::endl;
+	test["test"] = 42;
+	std::cout << "test == map: " << (test == map) << std::endl;
+	std::cout << "test > map: " << (test > map) << std::endl;
+	std::cout << "test < map: " << (test < map) << std::endl;
+	std::cout << "test <= map: " << (test <= map) << std::endl;
+	std::cout << "test >= map: " << (test >= map) << std::endl;
 }
