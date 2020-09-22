@@ -14,7 +14,6 @@ namespace ft
 			typedef BNode<K, T>* pointer;
 		protected:
 			pointer _ptr;
-			pointer _last;
 		private:
 			pointer _root(pointer ptr)
 			{
@@ -36,25 +35,24 @@ namespace ft
 			};
 			pointer _successor(pointer ptr)
 			{
-				_last = ptr;
-				if (ptr->right)
-					return (ptr->right);
-				pointer p = ptr->parent;
-				while (p && ptr == p->right)
+				pointer next;
+				if (!ptr->right)
 				{
-					ptr = p;
-					p = p->parent;
+					next = ptr;
+					while (next->parent && next == next->parent->right)
+						next = next->parent;
+					next = next->parent;
 				}
-				return (p);
+				else
+				{
+					next = ptr->right;
+					while (next->left)
+						next = next->left;
+				}
+				return (next);
 			};
 			pointer _predecessor(pointer ptr)
 			{
-				if (!ptr)
-				{
-					std::cout << "Here" << std::endl;
-					return (_last);
-				}
-				_last = ptr;
 				pointer next;
 
 				if (!ptr->left)
@@ -70,8 +68,7 @@ namespace ft
 					while (next->right)
 						next = next->right;
 				}
-				ptr = next;
-				return (ptr);
+				return (next);
 			};
 		public:
 			MapIterator(void)

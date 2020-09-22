@@ -51,9 +51,47 @@ void test_map(void)
 	print_map(map);
 	print_map(map2);
 
-	ft::Map<std::string, int>::iterator it = map.end();
-	--it;
-	std::cout << it->first << std::endl;
+	// std::cout << map2.lower_bound("z")->first << std::endl;
+
+	ft::Map<std::string, int> test;
+	test["d"] = 3;
+	test["c"] = 2;
+	test["b"] = 1;
+	test["a"] = 0;
+	std::cout << "Lower bounds" << std::endl;
+	std::cout << test.lower_bound("a")->first << std::endl;
+	std::cout << test.lower_bound("b")->first << std::endl;
+	std::cout << test.lower_bound("c")->first << std::endl;
+	std::cout << "Upper bounds" << std::endl;
+	std::cout << test.upper_bound("a")->first << std::endl;
+	std::cout << test.upper_bound("b")->first << std::endl;
+	std::cout << test.upper_bound("c")->first << std::endl;
+
+	std::cout << "Equal range" << std::endl;
+	std::pair<ft::Map<std::string, int>::iterator, ft::Map<std::string, int>::iterator> a = test.equal_range("c");
+	std::cout << a.first->first << " - " << a.second->first << std::endl;
+
+	std::cout << "Erase key" << std::endl;
+	print_map(test);
+	test.erase("c");
+	print_map(test);
+	test.erase(test.begin(), test.end());
+	print_map(test);
+
+	std::cout << "Clear" << std::endl;
+	test["hey"] = 42;
+	test["what's"] = 34;
+	test["up"] = 2;
+	test["?"] = 35;
+	print_map(test);
+	test.clear();
+	print_map(test);
+	// test.clear();
+	// print_map(test);
+
+	// ft::Map<std::string, int>::iterator it = map.end();
+	// --it;
+	// std::cout << it->first << std::endl;
 
 	// std::map<std::string, int> t;
 	// t["test"] = 4;

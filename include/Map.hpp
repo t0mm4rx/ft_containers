@@ -44,6 +44,14 @@ namespace ft
 			node _root;
 			node _end;
 			size_type _length;
+			void _print(node n)
+			{
+				if (!n)
+					return;
+				_print(n->left);
+				std::cout << n->pair.first << std::endl;
+				_print(n->right);
+			};
 			node _new_node(key_type key, mapped_type value, node parent)
 			{
 				node el = new BNode<key_type, mapped_type>();
@@ -108,6 +116,44 @@ namespace ft
 				}
 				return (0);
 			};
+			void _delete_node(node n)
+			{
+				node parent = n->parent;
+				if (!n->left && !n->right)
+				{
+					if (parent->right == n)
+						parent->right = 0;
+					else
+						parent->left = 0;
+					delete n;
+					return ;
+				}
+				if (n->right && !n->left)
+				{
+					if (parent->right == n)
+						parent->right = n->right;
+					else
+						parent->left = n->right;
+					n->right->parent = parent;
+					delete n;
+					return ;
+				}
+				if (n->left && !n->right)
+				{
+					if (parent->right == n)
+						parent->right = n->left;
+					else
+						parent->left = n->left;
+					n->left->parent = parent;
+					delete n;
+					return ;
+				}
+				node next = (++iterator(n)).node();
+				if (!next)
+					next = (--iterator(n)).node();
+				ft::swap(next->pair, n->pair);
+				_delete_node(next);
+			};
 		public:
 			explicit Map(const key_compare &comp = key_compare(), const allocator_type alloc = allocator_type())
 			: _allocator(alloc), _comp(comp)
@@ -161,11 +207,11 @@ namespace ft
 			};
 			iterator end(void)
 			{
-				return (iterator(_end));
+				return (iterator(0));
 			};
 			iterator end(void) const
 			{
-				return (iterator(_end));
+				return (iterator(0));
 			};
 			// reverse_iterator rbegin(void)
 			// {};
@@ -226,12 +272,27 @@ namespace ft
 					first++;
 				}
 			};
-			// void erase(iterator position)
-			// {};
-			// size_type erase(const key_type &value)
-			// {};
-			// void erase(iterator first, iterator last)
-			// {};
+			void erase(iterator position)
+			{
+				_delete_node(position.node());
+				--_length;
+			};
+			size_type erase(const key_type &value)
+			{
+				int i = 0;
+				iterator item;
+				while ((item = find(value)) != end())
+				{
+					erase(item);
+					++i;
+				};
+				return (i);
+			};
+			void erase(iterator first, iterator last)
+			{
+				while (first != last)
+					erase(first++);
+			};
 			void swap(Map &x)
 			{
 				ft::swap(_length, x._length);
@@ -239,13 +300,7 @@ namespace ft
 			};
 			void clear(void)
 			{
-				if (_root->right)
-					_free_tree(_root->right);
-				if (_root->left)
-					_free_tree(_root->left);
-				_root->right = 0;
-				_root->left = 0;
-				_length = 0;
+				erase(begin(), end());
 			};
 			key_compare key_comp(void) const
 			{
@@ -277,18 +332,38 @@ namespace ft
 				}
 				return (c);
 			};
-			// iterator lower_bound(const key_type &value)
-			// {};
+			iterator lower_bound(const key_type &key)
+			{
+				iterator it = begin();
+				while (it != end())
+				{
+					if (this->_comp(it->first, key) <= 0)
+						return (it);
+					++it;
+				}
+				return (end());
+			};
 			// const_iterator lower_bound(const key_type &k) const
 			// {};
-			// iterator upper_bound(const key_type &k)
-			// {};
+			iterator upper_bound(const key_type &key)
+			{
+				iterator it = begin();
+				while (it != end())
+				{
+					if (it->first != key && this->_comp(it->first, key) <= 0)
+						return (it);
+					++it;
+				};
+				return (end());
+			};
 			// const_iterator upper_bound(const key_type &k) const
 			// {};
 			// std::pair<const_iterator, const_iterator> equal_range(const key_type &k) const
 			// {};
-			// std::pair<const_iterator, const_iterator> equal_range(const key_type &k)
-			// {};
+			std::pair<iterator, iterator> equal_range(const key_type &k)
+			{
+				return (std::pair<iterator, iterator>(this->lower_bound(k), this->upper_bound(k)));
+			};
 	};
 };
 

@@ -32,11 +32,11 @@
 - [x] iterator insert (iterator position, const value_type& val);
 - [x] template <class InputIterator> void insert (InputIterator first, InputIterator last);
 ## erase
-- [ ] void erase (iterator position);
-- [ ] size_type erase (const key_type& k);
-- [ ] void erase (iterator first, iterator last);
+- [x] void erase (iterator position);
+- [x] size_type erase (const key_type& k);
+- [x] void erase (iterator first, iterator last);
 ## swap
-- [ ] void swap (map& x);
+- [x] void swap (map& x);
 ## clear
 - [x] void clear();
 ## key_comp
@@ -49,11 +49,11 @@
 ## count
 - [x] size_type count (const key_type& k) const;
 ## lower_bound
-- [ ] iterator lower_bound (const key_type& k)
+- [x] iterator lower_bound (const key_type& k)
 - [ ] const_iterator lower_bound (const key_type& k) const;
 ## upper_bound
-- [ ] iterator upper_bound (const key_type& k)
+- [x] iterator upper_bound (const key_type& k)
 - [ ] const_iterator upper_bound (const key_type& k) const;
 ## equal_range
 - [ ] pair<const_iterator,const_iterator> equal_range (const key_type& k) const
-- [ ] pair<iterator,iterator> equal_range (const key_type& k);
+- [x] pair<iterator,iterator> equal_range (const key_type& k);
