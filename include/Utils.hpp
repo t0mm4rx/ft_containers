@@ -26,6 +26,7 @@ namespace ft
 		BNode *left;
 		BNode *right;
 		BNode *parent;
+		bool end;
 	};
 };
 

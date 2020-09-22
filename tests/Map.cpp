@@ -22,6 +22,10 @@ void test_map(void)
 	map.insert(std::make_pair("a", 0));
 	map.insert(std::make_pair("b", 4));
 	map.insert(std::make_pair("b", -2));
+
+	// map.test();
+	// return;
+
 	std::cout << map.find("test")->second << std::endl;
 	std::cout << map.find("a")->second << std::endl;
 	std::cout << map.find("b")->second << std::endl;
@@ -35,12 +39,10 @@ void test_map(void)
 	std::cout << map.count("v") << " 'v' found" << std::endl;
 	std::cout << map.count("b") << " 'b' found" << std::endl;
 
-	map.clear();
-	print_map(map);
-
 	map["a"] = 1;
 	map["b"] = 2;
 	map["c"] = 3;
+
 
 	ft::Map<std::string, int> map2;
 	map2["x"] = 42;
@@ -50,7 +52,7 @@ void test_map(void)
 	map.swap(map2);
 	print_map(map);
 	print_map(map2);
-
+	
 	// std::cout << map2.lower_bound("z")->first << std::endl;
 
 	ft::Map<std::string, int> test;
@@ -75,6 +77,7 @@ void test_map(void)
 	print_map(test);
 	test.erase("c");
 	print_map(test);
+	std::cout << "Erase range" << std::endl;
 	test.erase(test.begin(), test.end());
 	print_map(test);
 
@@ -86,12 +89,12 @@ void test_map(void)
 	print_map(test);
 	test.clear();
 	print_map(test);
-	// test.clear();
-	// print_map(test);
 
-	// ft::Map<std::string, int>::iterator it = map.end();
-	// --it;
-	// std::cout << it->first << std::endl;
+	std::cout << "Decrementing end()" << std::endl;
+	print_map(map);
+	ft::Map<std::string, int>::iterator it = map.end();
+	--it;
+	std::cout << it->first << std::endl;
 
 	// std::map<std::string, int> t;
 	// t["test"] = 4;

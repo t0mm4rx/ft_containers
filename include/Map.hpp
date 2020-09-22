@@ -42,31 +42,16 @@ namespace ft
 			allocator_type _allocator;
 			key_compare _comp;
 			node _root;
-			node _end;
 			size_type _length;
-			void _print(node n)
-			{
-				if (!n)
-					return;
-				_print(n->left);
-				std::cout << n->pair.first << std::endl;
-				_print(n->right);
-			};
-			node _new_node(key_type key, mapped_type value, node parent)
+			node _new_node(key_type key, mapped_type value, node parent, bool end = false)
 			{
 				node el = new BNode<key_type, mapped_type>();
 				el->pair = std::make_pair(key, value);
 				el->right = 0;
 				el->left = 0;
 				el->parent = parent;
+				el->end = end;
 				return (el);
-			};
-			void _init_tree(void)
-			{
-				_root = _new_node(key_type(), mapped_type(), 0);
-				_end = _new_node(key_type(), mapped_type(), 0);
-				_end->left = _root;
-				_length = 0;
 			};
 			void _free_tree(node n)
 			{
@@ -76,13 +61,22 @@ namespace ft
 					_free_tree(n->left);
 				delete n;
 			};
-			node _insert_node(node n, key_type key, mapped_type value)
+			node _insert_node(node n, key_type key, mapped_type value, bool end = false)
 			{
-				if (key < n->pair.first)
+				if (n->end)
 				{
 					if (!n->left)
 					{
-						n->left = _new_node(key, value, n);
+						n->left = _new_node(key, value, n, end);
+						return (n->left);
+					}
+					_insert_node(n->left, key, value);
+				}
+				if (key < n->pair.first && !end)
+				{
+					if (!n->left)
+					{
+						n->left = _new_node(key, value, n, end);
 						return (n->left);
 					}
 					else
@@ -92,7 +86,7 @@ namespace ft
 				{
 					if (!n->right)
 					{
-						n->right = _new_node(key, value, n);
+						n->right = _new_node(key, value, n, end);
 						return (n->right);
 					}
 					else
@@ -102,7 +96,7 @@ namespace ft
 			node _find(node n, key_type key)
 			{
 				node tmp;
-				if (n->pair.first == key)
+				if (!n->end && n->pair.first == key)
 					return (n);
 				if (n->right)
 				{
@@ -153,6 +147,16 @@ namespace ft
 					next = (--iterator(n)).node();
 				ft::swap(next->pair, n->pair);
 				_delete_node(next);
+			};
+			void _init_tree(void)
+			{
+				_root = _new_node(key_type(), mapped_type(), 0);
+				_insert_node(_root, key_type(), mapped_type(), true);
+				_length = 0;
+			};
+			node _end(void) const
+			{
+				return (_root->right);
 			};
 		public:
 			explicit Map(const key_compare &comp = key_compare(), const allocator_type alloc = allocator_type())
@@ -207,11 +211,11 @@ namespace ft
 			};
 			iterator end(void)
 			{
-				return (iterator(0));
+				return (iterator(_end()));
 			};
 			iterator end(void) const
 			{
-				return (iterator(0));
+				return (iterator(_end()));
 			};
 			// reverse_iterator rbegin(void)
 			// {};
