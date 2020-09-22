@@ -41,7 +41,7 @@ namespace ft
 			{
 				return (c.back());
 			};
-			value_type &top(void) const
+			const value_type &top(void) const
 			{
 				return (c.back());
 			};
