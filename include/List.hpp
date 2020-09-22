@@ -62,7 +62,7 @@ namespace ft
 			{
 				_init_list();
 			};
-			explicit List(size_type n, const value_type &value, const allocator_type &alloc=allocator_type())
+			explicit List(size_type n, const value_type &value = value_type(), const allocator_type &alloc=allocator_type())
 			: _list_begin(0), _list_end(0), _allocator(alloc), _length(0)
 			{
 				_init_list();

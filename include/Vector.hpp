@@ -183,7 +183,10 @@ namespace ft
 			void			insert(iterator position, InputIterator begin, InputIterator end)
 			{
 				while (begin != end)
-					position = insert(position, *(begin++)) + 1;
+				{
+					position = insert(position, *begin) + 1;
+					++begin;
+				}
 			};
 			size_type		max_size(void) const
 			{
