@@ -10,5 +10,6 @@
 void	test_vector(void);
 void	test_list(void);
 void	test_map(void);
+void	test_stack(void);
 
 #endif

@@ -7,7 +7,8 @@ int main(void)
 {
 	// test_vector();
 	// test_list();
-	test_map();
+	// test_map();
+	test_stack();
 
 	return (0);
 }
