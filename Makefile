@@ -13,10 +13,6 @@ ${TARGET}: ${OBJ}
 	clang++ ${FLAGS} ${OBJ} -o ${TARGET}
 	./${TARGET}
 
-test:
-	clang++ -fsanitize=address -g3 main_test.cpp -o ${TARGET}_test
-	./${TARGET}_test
-
 clean:
 	rm -rf *.dSYM
 

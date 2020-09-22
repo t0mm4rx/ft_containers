@@ -16,9 +16,9 @@
 ## pop
 - [x] void pop();
 ## relational operators
-- [ ] template <class T, class Container> bool operator== (const queue<T,Container>& lhs, const queue<T,Container>& rhs);
-- [ ] template <class T, class Container> bool operator!= (const queue<T,Container>& lhs, const queue<T,Container>& rhs);
-- [ ] template <class T, class Container> bool operator< (const queue<T,Container>& lhs, const queue<T,Container>& rhs);
-- [ ] template <class T, class Container> bool operator<= (const queue<T,Container>& lhs, const queue<T,Container>& rhs);
-- [ ] template <class T, class Container> bool operator> (const queue<T,Container>& lhs, const queue<T,Container>& rhs);
-- [ ] template <class T, class Container> bool operator>= (const queue<T,Container>& lhs, const queue<T,Container>& rhs);
+- [x] template <class T, class Container> bool operator== (const queue<T,Container>& lhs, const queue<T,Container>& rhs);
+- [x] template <class T, class Container> bool operator!= (const queue<T,Container>& lhs, const queue<T,Container>& rhs);
+- [x] template <class T, class Container> bool operator< (const queue<T,Container>& lhs, const queue<T,Container>& rhs);
+- [x] template <class T, class Container> bool operator<= (const queue<T,Container>& lhs, const queue<T,Container>& rhs);
+- [x] template <class T, class Container> bool operator> (const queue<T,Container>& lhs, const queue<T,Container>& rhs);
+- [x] template <class T, class Container> bool operator>= (const queue<T,Container>& lhs, const queue<T,Container>& rhs);
