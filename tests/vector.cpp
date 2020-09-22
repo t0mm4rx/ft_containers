@@ -38,7 +38,7 @@ void	test_vector(void)
 {
 	// Default constructor
 	ft::Vector<int> vec;
-	std::vector<int> test;
+	ft::Vector<int> test;
 	// push_back
 	vec.push_back(4);
 	vec.push_back(8);
@@ -122,10 +122,13 @@ void	test_vector(void)
 	print_vector(vec);
 
 	// = operator
-	ft::Vector<int> vec3 = vec;
-	print_vector(vec3);
+	std::cout << "Copy" << std::endl;
+	ft::Vector<int> vec3;
 	vec3 = vec2;
+	std::cout << "size: " << vec3.size() << ", " << vec2.size() << std::endl;
+	std::cout << "capacity: " << vec3.capacity() << ", " << vec2.capacity() << std::endl;
 	print_vector(vec3);
+	print_vector(vec2);
 	
 	// Copy contsructor
 	ft::Vector<int> vec4(vec);
@@ -144,6 +147,10 @@ void	test_vector(void)
 	// Reverse iterator
 	std::cout << "Reverse iterator:" << std::endl;
 	print_vector_reverse(vec4);
+	std::cout << "vec4[0]: " << vec4[0] << std::endl;
+	std::cout << "vec4[1]: " << vec4[1] << std::endl;
+	std::cout << "vec4[2]: " << vec4[2] << std::endl;
+	std::cout << "vec4[3]: " << vec4[3] << std::endl;
 
 	// Const iterator
 	std::cout << "Const iterator:" << std::endl;

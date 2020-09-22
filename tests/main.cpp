@@ -6,10 +6,10 @@
 int main(void)
 {
 	test_vector();
-	test_list();
-	test_map();
-	test_stack();
-	test_queue();
+	// test_list();
+	// test_map();
+	// test_stack();
+	// test_queue();
 
 	return (0);
 }
