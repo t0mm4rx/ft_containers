@@ -50,6 +50,7 @@ I strongly advise you to compile with -fsantize=address -g3 on Linux to check le
 ./a.out stack
 ```
 You will have a formatted list of unit tests:
+
 ![Unit tests](./tests.png)
 ## Compile the project
 ```sh
