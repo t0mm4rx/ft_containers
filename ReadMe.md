@@ -38,3 +38,15 @@ We'll use a private property that will be a container (list by default), but it 
 Queue is a FIFO container. As stack, we'll use an other container specified during instanciation to build it.
 ## Tools
 You can find in tools/ a script to get a fresh todo list, directly constructed from cplusplus.com.
+## Tests
+You can copy/paste the tests folder inside your project. Edit the tests.hpp includes to your actual header files.
+Then you can compile all the cpp files inside the folder.
+```sh
+./a.out vector
+./a.out list
+./a.out map
+./a.out queue
+./a.out stack
+```
+You will have a formatted list of unit tests:
+![Unit tests](./tests.png)

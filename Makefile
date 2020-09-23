@@ -11,7 +11,21 @@ all: ${TARGET}
 
 ${TARGET}: ${OBJ}
 	clang++ ${FLAGS} ${OBJ} -o ${TARGET}
-	./${TARGET}
+
+vector: ${TARGET}
+	./${TARGET} vector
+
+list: ${TARGET}
+	./${TARGET} list
+
+map: ${TARGET}
+	./${TARGET} map
+
+stack: ${TARGET}
+	./${TARGET} stack
+
+queue: ${TARGET}
+	./${TARGET} queue
 
 clean:
 	rm -rf *.dSYM

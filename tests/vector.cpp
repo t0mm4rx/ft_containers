@@ -1,11 +1,11 @@
 #include "./tests.hpp"
 
 template <typename T>
-void print_vector(T vec)
+void print_vector(T vec, std::string type)
 {
 	typename T::iterator it;
 
-	std::cout << "size " << vec.size() << ": ";
+	std::cout << BOLD << type << ", size: " << vec.size() << ", empty: " << vec.empty() << ", capacity: " << vec.capacity() << RESET << std::endl;
 	it = vec.begin();
 	while (it != vec.end())
 	{
@@ -18,11 +18,11 @@ void print_vector(T vec)
 }
 
 template <typename T>
-void print_vector_reverse(T vec)
+void print_vector_reverse(T vec, std::string type)
 {
-	typename T::reverse_iterator it;
+	typename T::iterator it;
 
-	std::cout << "size " << vec.size() << ": ";
+	std::cout << BOLD << type << ", size: " << vec.size() << ", empty: " << vec.empty() << ", capacity: " << vec.capacity() << RESET << std::endl;
 	it = vec.rbegin();
 	while (it != vec.rend())
 	{
@@ -34,159 +34,255 @@ void print_vector_reverse(T vec)
 	std::cout << std::endl;
 }
 
+void default_constructor(void)
+{
+	print_header("Default constructor");
+	ft::Vector<int> v1;
+	std::vector<int> v2;
+	check("v1 == v2", v1 == v2);
+	v1.push_back(1);
+	v1.push_back(2);
+	v1.push_back(3);
+	v2.push_back(1);
+	v2.push_back(2);
+	v2.push_back(3);
+	check("v1 == v2", v1 == v2);
+}
+
+void copy_constructor(void)
+{
+	print_header("Copy");
+	ft::Vector<int> v1;
+	std::vector<int> v2;
+	v1.push_back(1);
+	v1.push_back(2);
+	v1.push_back(3);
+	v2.push_back(1);
+	v2.push_back(2);
+	v2.push_back(3);
+	ft::Vector<int> v3(v1);
+	std::vector<int> v4(v2);
+	v1.push_back(42);
+	v2.push_back(42);
+	check("v1 == v2", (v1 == v2));
+	check("v3 == v4", (v3 == v4));
+	check("v1 != v3", (v1 != v3));
+	check("v2 != v4", (v2 != v4));
+}
+
+void max_size(void)
+{
+	print_header("Max size");
+	ft::Vector<std::string> v1;
+	std::vector<std::string> v2;
+	check("v1.max_size() == v2.max_size()", v1.max_size(), v2.max_size());
+	v1.push_back("test");
+	v2.push_back("test");
+	check("v1.max_size() == v2.max_size()", v1.max_size(), v2.max_size());
+}
+
+void resize(void)
+{
+	print_header("Resize");
+	ft::Vector<std::string> v1;
+	std::vector<std::string> v2;
+	v1.resize(10, "test");
+	v2.resize(10, "test");
+	check("v1 == v2", (v1 == v2));
+	v1.resize(2, "42");
+	v2.resize(2, "42");
+	check("v1 == v2", (v1 == v2));
+}
+
+void access_operator(void)
+{
+	print_header("[] operator, at()");
+	ft::Vector<int> v1;
+	std::vector<int> v2;
+	v1.push_back(1);
+	v1.push_back(2);
+	v1.push_back(3);
+	v2.push_back(1);
+	v2.push_back(2);
+	v2.push_back(3);
+	check("v1[0] == v2[0]", v1[0], v2[0]);
+	check("v1[1] == v2[1]", v1[1], v2[1]);
+	check("v1[2] == v2[2]", v1[2], v2[2]);
+	try
+	{
+		std::cout << "v1.at(100): " << v1.at(100) << ": " << FAIL << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << "Exception: " << e.what() << ": " << BOLD << GREEN << GOOD << RESET << std::endl;
+	}
+	try
+	{
+		std::cout << "v2.at(100): " << v2.at(100) << ": " << FAIL  << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << "Exception: " << e.what() << ": " << BOLD << GREEN << GOOD << RESET << std::endl;
+	}
+	try
+	{
+		std::cout << "v1.at(-1): " << v1.at(-1) << ": " << FAIL  << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << "Exception: " << e.what() << ": " << BOLD << GREEN << GOOD << RESET << std::endl;
+	}
+	try
+	{
+		std::cout << "v2.at(-1): " << v2.at(-1) << ": " << FAIL  << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << "Exception: " << e.what() << ": " << BOLD << GREEN << GOOD << RESET << std::endl;
+	}
+}
+
+void front_back(void)
+{
+	print_header("Front / Back");
+	ft::Vector<int> v1;
+	std::vector<int> v2;
+	v1.push_back(1);
+	v1.push_back(2);
+	v1.push_back(3);
+	v2.push_back(1);
+	v2.push_back(2);
+	v2.push_back(3);
+	check("v1.front() == v2.front()", v1.front(), v2.front());
+	check("v1.back() == v2.back()", v1.front(), v2.front());
+}
+
+void assign(void)
+{
+	print_header("Assign");
+	std::string test[] = {"Hey", "what's", "up", "?"};
+	ft::Vector<std::string> v1;
+	std::vector<std::string> v2;
+	v1.assign(test, test + 4);
+	v2.assign(test, test + 4);
+	check("v1 == v2", v1 == v2);
+	v1.assign(10, "?");
+	v2.assign(10, "?");
+	check("v1 == v2", v1 == v2);
+}
+
+void insert(void)
+{
+	print_header("Insert");
+	int test[] = {1, 2, 3};
+	ft::Vector<int> v1;
+	std::vector<int> v2;
+	v1.insert(v1.begin(), 42);
+	v1.insert(v1.end(), 21);
+	v1.insert(v1.begin(), 10);
+	v1.insert(v1.begin() + 1, 11);
+	v1.insert(v1.begin() + 2, (size_t)3, 0);
+	v1.insert(v1.begin() + 1, test, test + 3);
+	v2.insert(v2.begin(), 42);
+	v2.insert(v2.end(), 21);
+	v2.insert(v2.begin(), 10);
+	v2.insert(v2.begin() + 1, 11);
+	v2.insert(v2.begin() + 2, (size_t)3, 0);
+	v2.insert(v2.begin() + 1, test, test + 3);
+	check("v1 == v2", v1 == v2);
+}
+
+void erase(void)
+{
+	print_header("Erase / Clear");
+	std::string test[] = {"Hey", "what's", "up", "?"};
+	ft::Vector<std::string> v1;
+	std::vector<std::string> v2;
+	v1.assign(test, test + 4);
+	v2.assign(test, test + 4);
+	v1.erase(v1.begin() + 2);
+	v2.erase(v2.begin() + 2);
+	check("v1 == v2", v1 == v2);
+	v1.clear();
+	v2.clear();
+	check("v1 == v2", v1 == v2);
+}
+
+void swap(void)
+{
+	print_header("Swap");
+	ft::Vector<int> v1;
+	std::vector<int> v2;
+	ft::Vector<int> v3;
+	std::vector<int> v4;
+	v1.push_back(1);
+	v1.push_back(2);
+	v1.push_back(3);
+	v2.push_back(1);
+	v2.push_back(2);
+	v2.push_back(3);
+	v3.push_back(42);
+	v3.push_back(43);
+	v4.push_back(42);
+	v4.push_back(43);
+	v1.swap(v3);
+	v2.swap(v4);
+	check("v1 == v2", v1 == v2);
+	check("v3 == v4", v3 == v4);
+}
+
+void operators(void)
+{
+	print_header("Operators");
+	ft::Vector<int> v1;
+	std::vector<int> v2;
+	ft::Vector<int> v3;
+	std::vector<int> v4;
+	v1.push_back(1);
+	v1.push_back(2);
+	v1.push_back(3);
+	v2.push_back(1);
+	v2.push_back(2);
+	v2.push_back(3);
+	v3 = v1;
+	v4 = v2;
+	check("v1 == v2", (v1 == v3), (v2 == v4));
+	check("v1 != v2", (v1 != v3), (v2 != v4));
+	check("v1 > v2", (v1 > v3), (v2 > v4));
+	check("v1 < v2", (v1 < v3), (v2 < v4));
+	check("v1 >= v2", (v1 >= v3), (v2 >= v4));
+	check("v1 <= v2", (v1 <= v3), (v2 <= v4));
+	v1.push_back(42);
+	v2.push_back(42);
+	check("v1 == v2", (v1 == v3), (v2 == v4));
+	check("v1 != v2", (v1 != v3), (v2 != v4));
+	check("v1 > v2", (v1 > v3), (v2 > v4));
+	check("v1 < v2", (v1 < v3), (v2 < v4));
+	check("v1 >= v2", (v1 >= v3), (v2 >= v4));
+	check("v1 <= v2", (v1 <= v3), (v2 <= v4));
+	v3.push_back(43);
+	v4.push_back(43);
+	check("v1 == v2", (v1 == v3), (v2 == v4));
+	check("v1 != v2", (v1 != v3), (v2 != v4));
+	check("v1 > v2", (v1 > v3), (v2 > v4));
+	check("v1 < v2", (v1 < v3), (v2 < v4));
+	check("v1 >= v2", (v1 >= v3), (v2 >= v4));
+	check("v1 <= v2", (v1 <= v3), (v2 <= v4));
+}
+
 void	test_vector(void)
 {
-	// Default constructor
-	ft::Vector<int> vec;
-	ft::Vector<int> test;
-	// push_back
-	vec.push_back(4);
-	vec.push_back(8);
-	vec.push_back(42);
-	vec.push_back(21);
-	vec.push_back(-42);
-	print_vector(vec);
+	print_header("Vector");
 
-	// Simple iterator
-	ft::Vector<int>::iterator it = vec.begin();
-	it += 2;
-	// Insert single element
-	vec.insert(it, 0);
-	print_vector(vec);
-	it += 30;
-	vec.insert(it, -21);
-	print_vector(vec);
-	it = vec.begin() + 2;
-
-	// Fill constructor
-	ft::Vector<int> vec2((size_t)5, 3);
-	// Insert range
-	vec.insert(vec.begin(), vec2.begin(), vec2.end());
-	print_vector(vec);
-	
-	// Max size
-	std::cout << "Max size: " << vec.max_size() << std::endl;
-	std::cout << "Max size: " << test.max_size() << std::endl;
-
-	// At
-	std::cout << "vec[5]: " << vec.at(5) << std::endl;
-	try {
-		std::cout << "vec[50]: " << vec.at(50) << std::endl;
-	} catch (std::exception &e) {
-		std::cout << "exception: " << e.what() << std::endl;
-	}
-	try {
-		std::cout << "vec[-1]: " << vec.at(-1) << std::endl;
-	} catch (std::exception &e) {
-		std::cout << "exception: " << e.what() << std::endl;
-	}
-	
-	print_vector(vec);
-	// Remove single element
-	vec.erase(vec.begin() + 2);
-	print_vector(vec);
-	std::cout << "Capacity: " << vec.capacity() << std::endl;
-	// Remove range
-	vec.erase(vec.begin(), vec.begin() + 3);
-	print_vector(vec);
-	vec.erase(vec.end() - 2, vec.end());
-	print_vector(vec);
-
-	// Clear
-	vec.clear();
-	print_vector(vec);
-	std::cout << "Capacity: " << vec.capacity() << std::endl;
-
-	// Assign range
-	test.push_back(1);
-	test.push_back(2);
-	test.push_back(3);
-	test.push_back(4);
-	print_vector(test);
-	vec.assign(test.begin(), test.end());
-	print_vector(vec);
-
-	// Front/Back
-	std::cout << "Front: " << vec.front() << std::endl;
-	std::cout << "Back: " << vec.back() << std::endl;
-
-	// pop_back
-	print_vector(vec);
-	vec.pop_back();
-	print_vector(vec);
-
-	// resize
-	vec.resize(2, 0);
-	print_vector(vec);
-	vec.resize(10, 42);
-	print_vector(vec);
-
-	// = operator
-	std::cout << "Copy" << std::endl;
-	ft::Vector<int> vec3;
-	vec3 = vec2;
-	std::cout << "size: " << vec3.size() << ", " << vec2.size() << std::endl;
-	std::cout << "capacity: " << vec3.capacity() << ", " << vec2.capacity() << std::endl;
-	print_vector(vec3);
-	print_vector(vec2);
-	
-	// Copy contsructor
-	ft::Vector<int> vec4(vec);
-	print_vector(vec4);
-
-	// swap
-	std::cout << "First swap: " << std::endl;
-	vec4.swap(vec3);
-	print_vector(vec3);
-	print_vector(vec4);
-	std::cout << "Second swap: " << std::endl;
-	swap(vec3, vec4);
-	print_vector(vec3);
-	print_vector(vec4);
-
-	// Reverse iterator
-	std::cout << "Reverse iterator:" << std::endl;
-	print_vector_reverse(vec4);
-	std::cout << "vec4[0]: " << vec4[0] << std::endl;
-	std::cout << "vec4[1]: " << vec4[1] << std::endl;
-	std::cout << "vec4[2]: " << vec4[2] << std::endl;
-	std::cout << "vec4[3]: " << vec4[3] << std::endl;
-
-	// Const iterator
-	std::cout << "Const iterator:" << std::endl;
-	ft::Vector<int>::const_iterator cit = const_cast<const ft::Vector<int>& >(vec4).begin();
-	std::cout << *cit << std::endl;
-	cit++;
-	std::cout << *cit << std::endl;
-	cit += 3;
-	std::cout << *cit << std::endl;
-
-	// Const revserse iterator
-	std::cout << "Const reverse iterator:" << std::endl;
-	ft::Vector<int>::const_reverse_iterator crit = const_cast<const ft::Vector<int>& >(vec4).rbegin();
-	std::cout << *crit << std::endl;
-	crit += 8;
-	std::cout << *crit << std::endl;
-	crit++;
-	std::cout << *crit << std::endl;
-
-	// Operator ==
-	std::cout << "vec4 == vec: " << (vec4 == vec) << std::endl;
-	vec4.push_back(2);
-	std::cout << "vec4 == vec: " << (vec4 == vec) << std::endl;
-	vec = vec4;
-	std::cout << "vec4 == vec: " << (vec4 == vec) << std::endl;
-	vec[3] = -1;
-	std::cout << "vec4 == vec: " << (vec4 == vec) << std::endl;
-	vec.clear();
-	vec4.clear();
-	std::cout << "vec4 == vec: " << (vec4 == vec) << std::endl;
-
-	// Operator >, <
-	vec.push_back(1);
-	std::cout << "vec4 > vec: " << (vec4 > vec) << std::endl;
-	std::cout << "vec4 < vec: " << (vec4 < vec) << std::endl;
-	vec4.push_back(2);
-	std::cout << "vec4 > vec: " << (vec4 > vec) << std::endl;
-	std::cout << "vec4 < vec: " << (vec4 < vec) << std::endl;
+	default_constructor();
+	copy_constructor();
+	max_size();
+	resize();
+	access_operator();
+	front_back();
+	assign();
+	insert();
+	erase();
+	swap();
+	operators();
 }
