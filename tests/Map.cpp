@@ -230,9 +230,45 @@ inline void range(void)
 	check("a.second->second == b.second->second", a.second->second, b.second->second);
 }
 
-inline void operators(void)
+inline void operators_comp(void)
 {
-	
+	print_header("Operators");
+	ft::Map<std::string, int> m1;
+	std::map<std::string, int> m2;
+	m1["a"] = 1;
+	m1["b"] = 42;
+	m1["c"] = 42;
+	m1["d"] = 42;
+	m2["a"] = 1;
+	m2["b"] = 42;
+	m2["c"] = 42;
+	m2["d"] = 42;
+	ft::Map<std::string, int> m3;
+	std::map<std::string, int> m4;
+	m3 = m1;
+	m4 = m2;
+	check("m1 == m2", (m1 == m3), (m2 == m4));
+	check("m1 != m2", (m1 != m3), (m2 != m4));
+	check("m1 > m2", (m1 > m3), (m2 > m4));
+	check("m1 < m2", (m1 < m3), (m2 < m4));
+	check("m1 >= m2", (m1 >= m3), (m2 >= m4));
+	check("m1 <= m2", (m1 <= m3), (m2 <= m4));
+	m1["e"] = 1;
+	m2["e"] = 1;
+	check("m1 == m2", (m1 == m3), (m2 == m4));
+	check("m1 != m2", (m1 != m3), (m2 != m4));
+	check("m1 > m2", (m1 > m3), (m2 > m4));
+	check("m1 < m2", (m1 < m3), (m2 < m4));
+	check("m1 >= m2", (m1 >= m3), (m2 >= m4));
+	check("m1 <= m2", (m1 <= m3), (m2 <= m4));
+	m3["e"] = 3;
+	m4["e"] = 3;
+	check("m1 == m2", (m1 == m3), (m2 == m4));
+	check("m1 != m2", (m1 != m3), (m2 != m4));
+	check("m1 > m2", (m1 > m3), (m2 > m4));
+	check("m1 < m2", (m1 < m3), (m2 < m4));
+	check("m1 >= m2", (m1 >= m3), (m2 >= m4));
+	check("m1 <= m2", (m1 <= m3), (m2 <= m4));
 }
 
 void test_map(void)
@@ -249,4 +285,5 @@ void test_map(void)
 	count();
 	bounds();
 	range();
+	operators_comp();
 }

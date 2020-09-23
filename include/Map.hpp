@@ -430,6 +430,11 @@ namespace ft
 		return (true);
 	};
 	template <class Key, class T, class Compare, class Alloc>
+	bool operator!=(const Map<Key, T, Compare, Alloc> &lhs, const Map<Key, T, Compare, Alloc> &rhs)
+	{
+		return (!(lhs == rhs));
+	};
+	template <class Key, class T, class Compare, class Alloc>
 	bool operator>(const Map<Key, T, Compare, Alloc> &lhs, const Map<Key, T, Compare, Alloc> &rhs)
 	{
 		typename ft::Map<Key, T, Compare, Alloc>::const_iterator it = rhs.begin();
