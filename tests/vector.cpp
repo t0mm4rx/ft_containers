@@ -1,7 +1,7 @@
 #include "./tests.hpp"
 
 template <typename T>
-inline void print_vector(T vec, std::string type)
+static void print_vector(T vec, std::string type)
 {
 	typename T::iterator it;
 
@@ -18,7 +18,7 @@ inline void print_vector(T vec, std::string type)
 }
 
 template <typename T>
-inline void print_vector_reverse(T vec, std::string type)
+static void print_vector_reverse(T vec, std::string type)
 {
 	typename T::iterator it;
 
@@ -34,7 +34,7 @@ inline void print_vector_reverse(T vec, std::string type)
 	std::cout << std::endl;
 }
 
-inline void default_constructor(void)
+static void default_constructor(void)
 {
 	print_header("Default constructor");
 	ft::Vector<int> v1;
@@ -49,7 +49,7 @@ inline void default_constructor(void)
 	check("v1 == v2", v1 == v2);
 }
 
-inline void copy_constructor(void)
+static void copy_constructor(void)
 {
 	print_header("Copy");
 	ft::Vector<int> v1;
@@ -70,7 +70,7 @@ inline void copy_constructor(void)
 	check("v2 != v4", (v2 != v4));
 }
 
-inline void max_size(void)
+static void max_size(void)
 {
 	print_header("Max size");
 	ft::Vector<std::string> v1;
@@ -81,7 +81,7 @@ inline void max_size(void)
 	check("v1.max_size() == v2.max_size()", v1.max_size(), v2.max_size());
 }
 
-inline void resize(void)
+static void resize(void)
 {
 	print_header("Resize");
 	ft::Vector<std::string> v1;
@@ -94,7 +94,7 @@ inline void resize(void)
 	check("v1 == v2", (v1 == v2));
 }
 
-inline void access_operator(void)
+static void access_operator(void)
 {
 	print_header("[] operator, at()");
 	ft::Vector<int> v1;
@@ -142,7 +142,7 @@ inline void access_operator(void)
 	}
 }
 
-inline void front_back(void)
+static void front_back(void)
 {
 	print_header("Front / Back");
 	ft::Vector<int> v1;
@@ -157,7 +157,7 @@ inline void front_back(void)
 	check("v1.back() == v2.back()", v1.front(), v2.front());
 }
 
-inline void assign(void)
+static void assign(void)
 {
 	print_header("Assign");
 	std::string test[] = {"Hey", "what's", "up", "?"};
@@ -171,7 +171,7 @@ inline void assign(void)
 	check("v1 == v2", v1 == v2);
 }
 
-inline void insert(void)
+static void insert(void)
 {
 	print_header("Insert");
 	int test[] = {1, 2, 3};
@@ -192,7 +192,7 @@ inline void insert(void)
 	check("v1 == v2", v1 == v2);
 }
 
-inline void erase(void)
+static void erase(void)
 {
 	print_header("Erase / Clear");
 	std::string test[] = {"Hey", "what's", "up", "?"};
@@ -208,7 +208,7 @@ inline void erase(void)
 	check("v1 == v2", v1 == v2);
 }
 
-inline void swap(void)
+static void swap(void)
 {
 	print_header("Swap");
 	ft::Vector<int> v1;
@@ -231,7 +231,7 @@ inline void swap(void)
 	check("v3 == v4", v3 == v4);
 }
 
-inline void operators(void)
+static void operators(void)
 {
 	print_header("Operators");
 	ft::Vector<int> v1;

@@ -3,7 +3,7 @@
 #include <utility>
 
 template <class T>
-inline void print_map(T map)
+static void print_map(T map)
 {
 	typename T::iterator it = map.begin();
 	std::cout << " --- Map of size " << map.size() << " ---" << std::endl;
@@ -15,7 +15,7 @@ inline void print_map(T map)
 	std::cout << " --- " << std::endl;
 }
 
-inline void constructors(void)
+static void constructors(void)
 {
 	print_header("Constructors / Copy");
 	std::pair<int, int> a[] = {std::make_pair(0, 1), std::make_pair(1, 0), std::make_pair(2, 1)};
@@ -43,7 +43,7 @@ inline void constructors(void)
 	check("(copy) m9 == m10", (m9 == m10));
 }
 
-inline void max_size(void)
+static void max_size(void)
 {
 	print_header("Size");
 	ft::Map<int, int> m1;
@@ -54,7 +54,7 @@ inline void max_size(void)
 	check("m3.max_size() == m4.max_size()", m3.max_size(), m4.max_size());
 }
 
-inline void access_operator(void)
+static void access_operator(void)
 {
 	print_header("[] operator");
 	ft::Map<std::string, int> m1;
@@ -77,7 +77,7 @@ inline void access_operator(void)
 	check("m1['z'] == m2['z']", m1["z"], m2["z"]);
 }
 
-inline void insert(void)
+static void insert(void)
 {
 	print_header("Insert");
 	std::pair<int, int> a[] = {std::make_pair(0, 1), std::make_pair(1, 0), std::make_pair(2, 1)};
@@ -93,7 +93,7 @@ inline void insert(void)
 	check("m1 == m2", m1 == m2);
 }
 
-inline void erase(void)
+static void erase(void)
 {
 	print_header("Erase");
 	ft::Map<std::string, int> m1;
@@ -122,7 +122,7 @@ inline void erase(void)
 	check("m1 == m2", m1 == m2);
 }
 
-inline void swap(void)
+static void swap(void)
 {
 	print_header("Swap");
 	ft::Map<std::string, int> m1;
@@ -145,7 +145,7 @@ inline void swap(void)
 	check("m3 == m4", m3 == m4);
 }
 
-inline void clear(void)
+static void clear(void)
 {
 	print_header("Clear");
 	ft::Map<std::string, int> m1;
@@ -161,7 +161,7 @@ inline void clear(void)
 	print_map(m2);
 }
 
-inline void find(void)
+static void find(void)
 {
 	print_header("Find");
 	ft::Map<std::string, int> m1;
@@ -174,7 +174,7 @@ inline void find(void)
 	check("m1.find('z') == m2.find('z')", m1.find("a")->second, m2.find("a")->second);
 }
 
-inline void count(void)
+static void count(void)
 {
 	print_header("Count");
 	ft::Map<std::string, int> m1;
@@ -190,7 +190,7 @@ inline void count(void)
 	check("m1.count('z') == m2.count('z')", m1.count("z"), m2.count("z"));
 }
 
-inline void bounds()
+static void bounds()
 {
 	print_header("Bounds");
 	ft::Map<std::string, int> m1;
@@ -209,7 +209,7 @@ inline void bounds()
 	check("m1.upper_bound() == m2.upper_bound()", m1.upper_bound("c")->first, m2.upper_bound("c")->first);
 }
 
-inline void range(void)
+static void range(void)
 {
 	print_header("Equal range");
 	ft::Map<std::string, int> m1;
@@ -230,7 +230,7 @@ inline void range(void)
 	check("a.second->second == b.second->second", a.second->second, b.second->second);
 }
 
-inline void operators_comp(void)
+static void operators_comp(void)
 {
 	print_header("Operators");
 	ft::Map<std::string, int> m1;

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 template <class T>
-inline void print_list(T &list)
+static void print_list(T &list)
 {
 	typename T::iterator it = list.begin();
 	typename T::iterator it2;
@@ -24,7 +24,7 @@ struct Greater {
     bool operator()(const int &a, const int &b) {return a < b;}
 };
 
-inline void constructors(void)
+static void constructors(void)
 {
 	print_header("Default constructor");
 	int test[] = {0, 1, 2, 3};
@@ -45,7 +45,7 @@ inline void constructors(void)
 	check("(copy) l9 == l10", l9 == l10);
 }
 
-inline void copy_operator(void)
+static void copy_operator(void)
 {
 	print_header("Operator =");
 	int test[] = {0, 1, 2, 3};
@@ -63,7 +63,7 @@ inline void copy_operator(void)
 	check("l2 != l4", l2 != l4);
 }
 
-inline void max_size(void)
+static void max_size(void)
 {
 	print_header("Max size");
 	ft::List<int> l1;
@@ -74,7 +74,7 @@ inline void max_size(void)
 	check("l3.max_size() == l4.max_size()", l3.max_size(), l4.max_size());
 }
 
-inline void front_back(void)
+static void front_back(void)
 {
 	print_header("Front / Back");
 	ft::List<int> l1;
@@ -90,7 +90,7 @@ inline void front_back(void)
 	check("l1.back() == l2.back()", l1.back(), l2.back());
 }
 
-inline void assign(void)
+static void assign(void)
 {
 	print_header("Assign");
 	int test[] = {0, 1, 2, 3};
@@ -104,7 +104,7 @@ inline void assign(void)
 	check("l1 == l2", l1 == l2);
 }
 
-inline void push(void)
+static void push(void)
 {
 	print_header("Push front/back");
 	ft::List<int> l1;
@@ -127,7 +127,7 @@ inline void push(void)
 	check("l1 == l2", l1 == l2);
 }
 
-inline void swap(void)
+static void swap(void)
 {
 	print_header("Swap");
 	ft::List<int> l1;
@@ -148,7 +148,7 @@ inline void swap(void)
 	check("l3 == l4", l3 == l4);
 }
 
-inline void resize(void)
+static void resize(void)
 {
 	print_header("Resize / Clear");
 	ft::List<int> l1;
@@ -169,7 +169,7 @@ inline void resize(void)
 	check("l1 == l2", l1 == l2);
 }
 
-inline void splice(void)
+static void splice(void)
 {
 	print_header("Splice");
 	ft::List<int> l1((size_t)10, 5);
@@ -198,9 +198,9 @@ inline void splice(void)
 	check("l3 == l4", l3 == l4);
 }
 
-inline bool even(const int& value) { return (value % 2) == 0; } 
+static bool even(const int& value) { return (value % 2) == 0; } 
 
-inline void remove(void)
+static void remove(void)
 {
 	print_header("Remove / Remove if");
 	int test[] = {0, 0, 0, 1, 2, 0, 5, 3, 4, 5, 1, -1, 0, 1};
@@ -216,7 +216,7 @@ inline void remove(void)
 	check("l1 == l2", l1 == l2);
 }
 
-inline void erase(void)
+static void erase(void)
 {
 	print_header("Erase");
 	int test[] = {0, 0, 0, 1, 2, 0, 5, 3, 4, 5, 1, -1, 0, 1};
@@ -234,12 +234,12 @@ inline void erase(void)
 	check("l1 == l2", l1 == l2);
 }
 
-inline bool compare(int a, int b) 
+static bool compare(int a, int b) 
 { 
     return (a >= b); 
 } 
 
-inline void unique()
+static void unique()
 {
 	print_header("Unique");
 	int test[] = {0, 0, 0, 1, 2, 0, 5, 3, 4, 5, 1, -1, 0, 1};
@@ -255,7 +255,7 @@ inline void unique()
 	check("l1 == l2", l1 == l2);
 }
 
-inline void merge(void)
+static void merge(void)
 {
 	print_header("Merge");
 	int test[] = {1, 2, 3};
@@ -278,7 +278,7 @@ inline void merge(void)
 	check("l3 == l4", l3 == l4);
 }
 
-inline void reverse(void)
+static void reverse(void)
 {
 	print_header("Reverse");
 	int test[] = {0, 0, 0, 1, 2, 0, 5, 3, 4, 5, 1, -1, 0, 1};
@@ -289,7 +289,7 @@ inline void reverse(void)
 	check("l1 == l2", l1 == l2);
 }
 
-inline void operators(void)
+static void operators(void)
 {
 	print_header("Operators");
 	int test[] = {0, 0, 0, 1, 2, 0, 5, 3, 4, 5, 1, -1, 0, 1};
