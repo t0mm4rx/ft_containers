@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 template <class T>
-void print_list(T &list)
+inline void print_list(T &list)
 {
 	typename T::iterator it = list.begin();
 	typename T::iterator it2;
@@ -24,231 +24,320 @@ struct Greater {
     bool operator()(const int &a, const int &b) {return a < b;}
 };
 
+inline void constructors(void)
+{
+	print_header("Default constructor");
+	int test[] = {0, 1, 2, 3};
+	ft::List<int> l1;
+	std::list<int> l2;
+	check("(default) l1 == l2", l1 == l2);
+	ft::List<int> l3((size_t)10);
+	std::list<int> l4((size_t)10);
+	check("(fill with default value) l3 == l4", l3 == l4);
+	ft::List<int> l5((size_t)10, 42);
+	std::list<int> l6((size_t)10, 42);
+	check("(fill) l5 == l6", l5 == l6);
+	ft::List<int> l7(test, test + 4);
+	std::list<int> l8(test, test + 4);
+	check("(iterator) l7 == l8", l7 == l8);
+	ft::List<int> l9(l7);
+	std::list<int> l10(l8);
+	check("(copy) l9 == l10", l9 == l10);
+}
+
+inline void copy_operator(void)
+{
+	print_header("Operator =");
+	int test[] = {0, 1, 2, 3};
+	ft::List<int> l1(test, test + 4);
+	std::list<int> l2(test, test + 4);
+	ft::List<int> l3;
+	std::list<int> l4;
+	l3 = l1;
+	l4 = l2;
+	check("l1 == l3", l1 == l3);
+	check("l2 == l4", l2 == l4);
+	l1.push_back(1);
+	l2.push_back(1);
+	check("l1 != l3", l1 != l3);
+	check("l2 != l4", l2 != l4);
+}
+
+inline void max_size(void)
+{
+	print_header("Max size");
+	ft::List<int> l1;
+	std::list<int> l2;
+	ft::List<std::string> l3;
+	std::list<std::string> l4;
+	check("l1.max_size() == l2.max_size()", l1.max_size(), l2.max_size());
+	check("l3.max_size() == l4.max_size()", l3.max_size(), l4.max_size());
+}
+
+inline void front_back(void)
+{
+	print_header("Front / Back");
+	ft::List<int> l1;
+	std::list<int> l2;
+	check("front == back", l1.front() == l1.back());
+	l1.push_back(1);
+	l1.push_back(2);
+	l1.push_back(3);
+	l2.push_back(1);
+	l2.push_back(2);
+	l2.push_back(3);
+	check("l1.front() == l2.front()", l1.front(), l2.front());
+	check("l1.back() == l2.back()", l1.back(), l2.back());
+}
+
+inline void assign(void)
+{
+	print_header("Assign");
+	int test[] = {0, 1, 2, 3};
+	ft::List<int> l1;
+	std::list<int> l2;
+	l1.assign(test, test + 4);
+	l2.assign(test, test + 4);
+	check("l1 == l2", l1 == l2);
+	l1.assign((size_t)10, 42);
+	l2.assign((size_t)10, 42);
+	check("l1 == l2", l1 == l2);
+}
+
+inline void push(void)
+{
+	print_header("Push front/back");
+	ft::List<int> l1;
+	std::list<int> l2;
+	for (int _ = 0; _ < 100; _++)
+	{
+		if (rand() % 2)
+		{
+			int n = rand() % 100;
+			l1.push_front(n);
+			l2.push_front(n);
+		}
+		else
+		{
+			int n = rand() % 100;
+			l1.push_back(n);
+			l2.push_back(n);
+		}
+	}
+	check("l1 == l2", l1 == l2);
+}
+
+inline void swap(void)
+{
+	print_header("Swap");
+	ft::List<int> l1;
+	std::list<int> l2;
+	ft::List<int> l3;
+	std::list<int> l4;
+	l1.push_front(1);
+	l1.push_front(2);
+	l1.push_front(3);
+	l2.push_front(1);
+	l2.push_front(2);
+	l2.push_front(3);
+	l3.push_front(42);
+	l4.push_front(42);
+	l1.swap(l3);
+	l2.swap(l4);
+	check("l1 == l2", l1 == l2);
+	check("l3 == l4", l3 == l4);
+}
+
+inline void resize(void)
+{
+	print_header("Resize / Clear");
+	ft::List<int> l1;
+	std::list<int> l2;
+	l1.resize(10, 42);
+	l2.resize(10, 42);
+	check("l1 == l2", l1 == l2);
+	l1.resize(2, 42);
+	l2.resize(2, 42);
+	check("l1 == l2", l1 == l2);
+	l1.resize(0, 0);
+	l2.resize(0, 0);
+	check("l1 == l2", l1 == l2);
+	l1.resize(2, 42);
+	l1.clear();
+	l2.resize(2, 42);
+	l2.clear();
+	check("l1 == l2", l1 == l2);
+}
+
+inline void splice(void)
+{
+	print_header("Splice");
+	ft::List<int> l1((size_t)10, 5);
+	std::list<int> l2((size_t)10, 5);
+	ft::List<int> l3((size_t)3, 0);
+	std::list<int> l4((size_t)3, 0);
+	l1.splice(++l1.begin(), l3);
+	l2.splice(++l2.begin(), l4);
+	check("l1 == l2", l1 == l2);
+	check("l3 == l4", l3 == l4);
+	l1.assign((size_t)10, 5);
+	l2.assign((size_t)10, 5);
+	l3.assign((size_t)3, 0);
+	l4.assign((size_t)3, 0);
+	l1.splice(l1.begin(), l3, ++l3.begin());
+	l2.splice(l2.begin(), l4, ++l4.begin());
+	check("l1 == l2", l1 == l2);
+	check("l3 == l4", l3 == l4);
+	l1.assign((size_t)10, 5);
+	l2.assign((size_t)10, 5);
+	l3.assign((size_t)3, 0);
+	l4.assign((size_t)3, 0);
+	l1.splice(l1.begin(), l3, ++l3.begin(), --l3.end());
+	l2.splice(l2.begin(), l4, ++l4.begin(), --l4.end());
+	check("l1 == l2", l1 == l2);
+	check("l3 == l4", l3 == l4);
+}
+
+inline bool even(const int& value) { return (value % 2) == 0; } 
+
+inline void remove(void)
+{
+	print_header("Remove / Remove if");
+	int test[] = {0, 0, 0, 1, 2, 0, 5, 3, 4, 5, 1, -1, 0, 1};
+	ft::List<int> l1(test, test + 14);
+	std::list<int> l2(test, test + 14);
+	l1.remove(0);
+	l1.remove(5);
+	l2.remove(0);
+	l2.remove(5);
+	check("l1 == l2", l1 == l2);
+	l1.remove_if(even);
+	l2.remove_if(even);
+	check("l1 == l2", l1 == l2);
+}
+
+inline void erase(void)
+{
+	print_header("Erase");
+	int test[] = {0, 0, 0, 1, 2, 0, 5, 3, 4, 5, 1, -1, 0, 1};
+	ft::List<int> l1(test, test + 14);
+	std::list<int> l2(test, test + 14);
+	l1.erase(l1.begin());
+	l1.erase(--l1.end());
+	l1.erase(--l1.end());
+	l2.erase(l2.begin());
+	l2.erase(--l2.end());
+	l2.erase(--l2.end());
+	check("l1 == l2", l1 == l2);
+	l1.erase(++l1.begin(), --l1.end());
+	l2.erase(++l2.begin(), --l2.end());
+	check("l1 == l2", l1 == l2);
+}
+
+inline bool compare(int a, int b) 
+{ 
+    return (a >= b); 
+} 
+
+inline void unique()
+{
+	print_header("Unique");
+	int test[] = {0, 0, 0, 1, 2, 0, 5, 3, 4, 5, 1, -1, 0, 1};
+	ft::List<int> l1(test, test + 14);
+	std::list<int> l2(test, test + 14);
+	l1.unique();
+	l2.unique();
+	check("l1 == l2", l1 == l2);
+	l1.assign(test, test + 14);
+	l2.assign(test, test + 14);
+	l1.unique(compare);
+	l2.unique(compare);
+	check("l1 == l2", l1 == l2);
+}
+
+inline void merge(void)
+{
+	print_header("Merge");
+	int test[] = {1, 2, 3};
+	int test2[] = {42, 43, 44};
+	ft::List<int> l1(test, test + 3);
+	std::list<int> l2(test, test + 3);
+	ft::List<int> l3(test2, test2 + 3);
+	std::list<int> l4(test2, test2 + 3);
+	l1.merge(l3);
+	l2.merge(l4);
+	check("l1 == l2", l1 == l2);
+	check("l3 == l4", l3 == l4);
+	l1.assign(test, test + 3);
+	l2.assign(test, test + 3);
+	l3.assign(test2, test2 + 3);
+	l4.assign(test2, test2 + 3);
+	l1.merge(l3, compare);
+	l2.merge(l4, compare);
+	check("l1 == l2", l1 == l2);
+	check("l3 == l4", l3 == l4);
+}
+
+inline void reverse(void)
+{
+	print_header("Reverse");
+	int test[] = {0, 0, 0, 1, 2, 0, 5, 3, 4, 5, 1, -1, 0, 1};
+	ft::List<int> l1(test, test + 14);
+	std::list<int> l2(test, test + 14);
+	l1.reverse();
+	l2.reverse();
+	check("l1 == l2", l1 == l2);
+}
+
+inline void operators(void)
+{
+	print_header("Operators");
+	int test[] = {0, 0, 0, 1, 2, 0, 5, 3, 4, 5, 1, -1, 0, 1};
+	ft::List<int> l1(test, test + 14);
+	std::list<int> l2(test, test + 14);
+	ft::List<int> l3(l1);
+	std::list<int> l4(l2);
+	check("l1 == l2", (l1 == l3), (l2 == l4));
+	check("l1 != l2", (l1 != l3), (l2 != l4));
+	check("l1 > l2", (l1 > l3), (l2 > l4));
+	check("l1 < l2", (l1 < l3), (l2 < l4));
+	check("l1 >= l2", (l1 >= l3), (l2 >= l4));
+	check("l1 <= l2", (l1 <= l3), (l2 <= l4));
+	l1.push_back(42);
+	l2.push_back(42);
+	check("l1 == l2", (l1 == l3), (l2 == l4));
+	check("l1 != l2", (l1 != l3), (l2 != l4));
+	check("l1 > l2", (l1 > l3), (l2 > l4));
+	check("l1 < l2", (l1 < l3), (l2 < l4));
+	check("l1 >= l2", (l1 >= l3), (l2 >= l4));
+	check("l1 <= l2", (l1 <= l3), (l2 <= l4));
+	l3.push_back(43);
+	l4.push_back(43);
+	check("l1 == l2", (l1 == l3), (l2 == l4));
+	check("l1 != l2", (l1 != l3), (l2 != l4));
+	check("l1 > l2", (l1 > l3), (l2 > l4));
+	check("l1 < l2", (l1 < l3), (l2 < l4));
+	check("l1 >= l2", (l1 >= l3), (l2 >= l4));
+	check("l1 <= l2", (l1 <= l3), (l2 <= l4));
+}
+
 void test_list(void)
 {
 	std::srand(time(0));
-	// Default constructor
-	ft::List<int> list;
-
-	std::cout << "Max size: " << list.max_size() << std::endl;
-	list.push_back(1);
-	list.push_back(2);
-	list.push_back(3);
-	list.push_back(4);
-	list.push_back(5);
-	// print_list(list);
-	std::cout << list.front() << std::endl;
-	std::cout << list.back() << std::endl;
-	std::cout << "Pop front" << std::endl;
-	list.pop_front();
-	std::cout << list.front() << std::endl;
-	std::cout << list.back() << std::endl;
-	std::cout << "Pop back" << std::endl;
-	list.pop_back();
-	std::cout << list.front() << std::endl;
-	std::cout << list.back() << std::endl;
-	std::cout << "Push front" << std::endl;
-	list.push_front(42);
-	std::cout << list.front() << std::endl;
-	std::cout << list.back() << std::endl;
-	std::cout << "Clear" << std::endl;
-	list.clear();
-	std::cout << list.front() << std::endl;
-	std::cout << list.back() << std::endl;
-
-	for (int i = -5; i < 6; i++)
-		list.push_back(i * 2);
-
-	// Iterator
-	ft::List<int>::iterator it = list.begin();
-	std::cout << *it << std::endl;
-	it++;
-	std::cout << *it << std::endl;
-	it--;
-	std::cout << *it << std::endl;
-	it += 11;
-	std::cout << *it << std::endl;
-
-	// Forward iterator
-	print_list(list);
-
-	// Fill constructor
-	ft::List<int> list2((size_t)10, 42);
-	std::cout << "Size: " << list2.size() << std::endl;
-	print_list(list2);
-
-	// Copy constructor
-	ft::List<int> list3(list2);
-	print_list(list3);
-
-	// Swap
-	std::cout << "First swap" << std::endl;
-	list3.swap(list);
-	print_list(list3);
-	print_list(list);
-	std::cout << "Second swap" << std::endl;
-	ft::swap(list, list3);
-	print_list(list3);
-	print_list(list);
-
-	// Reverse
-	std::cout << "Reverse" << std::endl;
-	list.reverse();
-	print_list(list);
-
-	// Simple sort
-	std::cout << "Sort" << std::endl;
-	ft::List<int> list4;
-	for (int i = 0; i < 20; i++)
-		list4.push_back(std::rand() % 100);
-	print_list(list4);
-	list4.sort();
-	print_list(list4);
-
-	// Compare sort
-	std::cout << "Custom sort" << std::endl;
-	list4.clear();
-	for (int i = 0; i < 20; i++)
-		list4.push_back(std::rand() % 100);
-	print_list(list4);
-	list4.sort(Greater());
-	print_list(list4);
-
-	// Single element insert
-	std::cout << "Insert single element" << std::endl;
-	print_list(list);
-	list.insert(list.begin() + 2, 42);
-	print_list(list);
-	list.insert(list.begin(), 42);
-	list.insert(list.end(), 42);
-	print_list(list);
-	
-	// Fill insert
-	std::cout << "Fill insert" << std::endl;
-	list.insert(list.end() - 4, (size_t)5, 0);
-	print_list(list);
-
-	// Range insert
-	std::cout << "Range insert" << std::endl;
-	list.insert(list.begin() + 1, list4.begin(), list4.begin() + 3);
-	print_list(list);
-
-	ft::List<int> x((size_t)3, 0);
-	ft::List<int> y;
-	y.push_back(1);
-	y.push_back(2);
-	y.push_back(3);
-	print_list(x);
-	x.insert(x.begin(), y.begin(), y.end());
-	print_list(x);
-
-	// Merge
-	std::cout << "Merge" << std::endl;
-	ft::List<int> a;
-	ft::List<int> b;
-	a.push_back(1);
-	a.push_back(3);
-	a.push_back(6);
-	b.push_back(2);
-	b.push_back(4);
-	b.push_back(5);
-	a.merge(b);
-	print_list(a);
-	print_list(b);
-
-	// Erase single element
-	std::cout << "Delete begin() + 2" << std::endl;
-	a.erase(a.begin() + 2);
-	print_list(a);
-	std::cout << "Delete end() - 2" << std::endl;
-	a.erase(a.end() - 2);
-	print_list(a);
-
-	// Erase range
-	std::cout << "Delete range" << std::endl;
-	a.push_back(7);
-	a.push_back(8);
-	a.push_back(9);
-	print_list(a);
-	a.erase(a.begin() + 1, a.begin() + 4);
-	print_list(a);
-
-	// Resize
-	std::cout << "Resize" << std::endl;
-	a.resize(2, 0);
-	print_list(a);
-	a.resize(10, 0);
-	print_list(a);
-
-	// Remove
-	std::cout << "Remove" << std::endl;
-	a.push_back(1);
-	a.insert(a.begin() + 4, 1);
-	print_list(a);
-	a.remove(1);
-	print_list(a);
-
-	// Unique
-	std::cout << "Sort" << std::endl;
-	ft::List<int> v((size_t)3, 0);
-	v.push_back(1);
-	v.push_back(2);
-	v.push_back(3);
-	v.push_back(0);
-	v.push_back(1);
-	print_list(v);
-	v.unique();
-	print_list(v);
-
-	// Reverse operator
-	std::cout << "Reverse operator" << std::endl;
-	ft::List<int>::reverse_iterator rit = v.rbegin();
-	while (rit != v.rend())
-	{
-		std::cout << *rit;
-		if (rit + 1 != v.rend())
-			std::cout << " - ";
-		rit++;
-	}
-	std::cout << std::endl;
-
-	// Splice
-	std::cout << "Splice" << std::endl;
-	ft::List<int> p((size_t)5, 0);
-	ft::List<int> l;
-	l.push_back(1);
-	l.push_back(2);
-	l.push_back(3);
-	l.splice(l.end(), p, p.begin(), p.end());
-	
-	print_list(l);
-	print_list(p);
-
-	p.push_front(1);
-	p.push_front(2);
-	p.push_front(3);
-	print_list(l);
-	print_list(p);
-	l.splice(l.begin() + 1, p, p.begin() + 1);
-	print_list(l);
-	print_list(p);
-
-	// Operator
-	std::cout << "Operators" << std::endl;
-	list2 = a;
-	print_list(list2);
-	print_list(a);
-	std::cout << "list2 == a: " << (list2 == a) << std::endl;
-	std::cout << "list2 > a: " << (list2 > a) << std::endl;
-	std::cout << "list2 < a: " << (list2 < a) << std::endl;
-	std::cout << "list2 <= a: " << (list2 <= a) << std::endl;
-	std::cout << "list2 >= a: " << (list2 >= a) << std::endl;
-	a.push_back(42);
-	print_list(list2);
-	print_list(a);
-	std::cout << "list2 == a: " << (list2 == a) << std::endl;
-	std::cout << "list2 > a: " << (list2 > a) << std::endl;
-	std::cout << "list2 < a: " << (list2 < a) << std::endl;
-	std::cout << "list2 <= a: " << (list2 <= a) << std::endl;
-	std::cout << "list2 >= a: " << (list2 >= a) << std::endl;
+	print_header("List");
+	constructors();
+	copy_operator();
+	max_size();
+	front_back();
+	assign();
+	push();
+	swap();
+	resize();
+	splice();
+	remove();
+	erase();
+	unique();
+	merge();
+	reverse();
+	operators();
 }

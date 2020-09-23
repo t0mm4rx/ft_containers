@@ -1,7 +1,7 @@
 #include "./tests.hpp"
 
 template <typename T>
-void print_vector(T vec, std::string type)
+inline void print_vector(T vec, std::string type)
 {
 	typename T::iterator it;
 
@@ -18,7 +18,7 @@ void print_vector(T vec, std::string type)
 }
 
 template <typename T>
-void print_vector_reverse(T vec, std::string type)
+inline void print_vector_reverse(T vec, std::string type)
 {
 	typename T::iterator it;
 
@@ -34,7 +34,7 @@ void print_vector_reverse(T vec, std::string type)
 	std::cout << std::endl;
 }
 
-void default_constructor(void)
+inline void default_constructor(void)
 {
 	print_header("Default constructor");
 	ft::Vector<int> v1;
@@ -49,7 +49,7 @@ void default_constructor(void)
 	check("v1 == v2", v1 == v2);
 }
 
-void copy_constructor(void)
+inline void copy_constructor(void)
 {
 	print_header("Copy");
 	ft::Vector<int> v1;
@@ -70,7 +70,7 @@ void copy_constructor(void)
 	check("v2 != v4", (v2 != v4));
 }
 
-void max_size(void)
+inline void max_size(void)
 {
 	print_header("Max size");
 	ft::Vector<std::string> v1;
@@ -81,7 +81,7 @@ void max_size(void)
 	check("v1.max_size() == v2.max_size()", v1.max_size(), v2.max_size());
 }
 
-void resize(void)
+inline void resize(void)
 {
 	print_header("Resize");
 	ft::Vector<std::string> v1;
@@ -94,7 +94,7 @@ void resize(void)
 	check("v1 == v2", (v1 == v2));
 }
 
-void access_operator(void)
+inline void access_operator(void)
 {
 	print_header("[] operator, at()");
 	ft::Vector<int> v1;
@@ -114,7 +114,7 @@ void access_operator(void)
 	}
 	catch (std::exception &e)
 	{
-		std::cout << "Exception: " << e.what() << ": " << BOLD << GREEN << GOOD << RESET << std::endl;
+		std::cout << e.what() << ": " << std::string(7, ' ') << BOLD << GREEN << GOOD << RESET << std::endl;
 	}
 	try
 	{
@@ -122,7 +122,7 @@ void access_operator(void)
 	}
 	catch (std::exception &e)
 	{
-		std::cout << "Exception: " << e.what() << ": " << BOLD << GREEN << GOOD << RESET << std::endl;
+		std::cout << e.what() << ": " << std::string(20, ' ') << BOLD << GREEN << GOOD << RESET << std::endl;
 	}
 	try
 	{
@@ -130,7 +130,7 @@ void access_operator(void)
 	}
 	catch (std::exception &e)
 	{
-		std::cout << "Exception: " << e.what() << ": " << BOLD << GREEN << GOOD << RESET << std::endl;
+		std::cout << e.what() << ": " << std::string(8, ' ') << BOLD << GREEN << GOOD << RESET << std::endl;
 	}
 	try
 	{
@@ -138,11 +138,11 @@ void access_operator(void)
 	}
 	catch (std::exception &e)
 	{
-		std::cout << "Exception: " << e.what() << ": " << BOLD << GREEN << GOOD << RESET << std::endl;
+		std::cout << e.what() << ": " << std::string(21, ' ') << BOLD << GREEN << GOOD << RESET << std::endl;
 	}
 }
 
-void front_back(void)
+inline void front_back(void)
 {
 	print_header("Front / Back");
 	ft::Vector<int> v1;
@@ -157,7 +157,7 @@ void front_back(void)
 	check("v1.back() == v2.back()", v1.front(), v2.front());
 }
 
-void assign(void)
+inline void assign(void)
 {
 	print_header("Assign");
 	std::string test[] = {"Hey", "what's", "up", "?"};
@@ -171,7 +171,7 @@ void assign(void)
 	check("v1 == v2", v1 == v2);
 }
 
-void insert(void)
+inline void insert(void)
 {
 	print_header("Insert");
 	int test[] = {1, 2, 3};
@@ -192,7 +192,7 @@ void insert(void)
 	check("v1 == v2", v1 == v2);
 }
 
-void erase(void)
+inline void erase(void)
 {
 	print_header("Erase / Clear");
 	std::string test[] = {"Hey", "what's", "up", "?"};
@@ -208,7 +208,7 @@ void erase(void)
 	check("v1 == v2", v1 == v2);
 }
 
-void swap(void)
+inline void swap(void)
 {
 	print_header("Swap");
 	ft::Vector<int> v1;
@@ -231,7 +231,7 @@ void swap(void)
 	check("v3 == v4", v3 == v4);
 }
 
-void operators(void)
+inline void operators(void)
 {
 	print_header("Operators");
 	ft::Vector<int> v1;

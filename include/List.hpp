@@ -304,7 +304,7 @@ namespace ft
 				iterator c = begin();
 				while (c != end())
 				{
-					if (*pred(*c))
+					if (pred(*c))
 						c = erase(c);
 					else
 						c++;
@@ -317,14 +317,34 @@ namespace ft
 			template <class BinaryPredicate>
 			void unique(BinaryPredicate binary_pred)
 			{
-				iterator cur = begin();
-				iterator next;
-				while (cur + 1 != end())
+				// iterator cur = begin();
+				// iterator next;
+				// while (cur + 1 != end())
+				// {
+				// 	next = cur + 1;
+				// 	while (next != end() && binary_pred(*cur, *next))
+				// 		next = erase(next);
+				// 	cur++;
+				// }
+				iterator it = begin();
+				iterator it2;
+				iterator tmp;
+				while (it != end())
 				{
-					next = cur + 1;
-					while (binary_pred(*cur, *next))
-						erase(next++);
-						cur++;
+					it2 = it;
+					tmp = it2;
+					++it2;
+					while (it2 != end())
+					{
+						if (binary_pred(*it, *it2))
+						{
+							erase(it2);
+							it2 = tmp;
+						}
+						tmp = it2;
+						++it2;
+					}
+					it++;
 				}
 			};
 			void merge(List &x)

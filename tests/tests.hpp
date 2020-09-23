@@ -38,7 +38,7 @@ void	test_queue(void);
 
 inline void print_header(std::string str)
 {
-	int margin = (30 - str.length()) / 2;
+	int margin = (40 - str.length()) / 2;
 	int width = (margin * 2 + str.length()) + 2;
 	std::cout << BLUE << std::endl;
 	std::cout << std::string(width, '*') << std::endl;
@@ -50,18 +50,20 @@ inline void print_header(std::string str)
 template <typename T>
 inline void check(std::string name, T a, T b)
 {
+	std::string margin(38 - name.length(), ' ');
 	if (a == b)
-		std::cout << name << ": " << BOLD << GREEN << GOOD << RESET << std::endl;
+		std::cout << name << ": " << margin << BOLD << GREEN << GOOD << RESET << std::endl;
 	else
-		std::cout << name << ": " << FAIL << std::endl;
+		std::cout << name << ": " << margin << FAIL << std::endl;
 };
 
 inline void check(std::string name, bool good)
 {
+	std::string margin(38 - name.length(), ' ');
 	if (good)
-		std::cout << name << ": " << BOLD << GREEN << GOOD << RESET << std::endl;
+		std::cout << name << ": " << margin << BOLD << GREEN << GOOD << RESET << std::endl;
 	else
-		std::cout << name << ": " << FAIL << std::endl;
+		std::cout << name << ": " << margin << FAIL << std::endl;
 };
 
 template <typename T>
@@ -75,6 +77,45 @@ bool operator==(ft::Vector<T> &a, std::vector<T> &b)
 	{
 		if (a[i] != b[i])
 			return (false);
+	}
+	return (true);
+};
+
+template <typename T>
+bool operator==(ft::List<T> &a, std::list<T> &b)
+{
+	if (a.size() != b.size())
+		return (false);
+	if (a.empty() != b.empty())
+		return (false);
+	typename ft::List<T>::iterator it = a.begin();
+	typename std::list<T>::iterator it2 = b.begin();
+	while (it != a.end())
+	{
+		if (*it != *it2)
+			return (false);
+		++it;
+		++it2;
+	}
+	return (true);
+};
+
+template <typename T, typename S>
+bool operator==(ft::Map<T, S> &a, std::map<T, S> &b)
+{
+	if (a.size() != b.size())
+		return (false);
+	std::cout << "here" << std::endl;
+	if (a.empty() != b.empty())
+		return (false);
+	typename ft::Map<T, S>::iterator it = a.begin();
+	typename std::map<T, S>::iterator it2 = b.begin();
+	while (it != a.end())
+	{
+		if (it->first != it2->first || it->second != it2->second)
+			return (false);
+		++it;
+		++it2;
 	}
 	return (true);
 };

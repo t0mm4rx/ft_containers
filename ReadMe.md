@@ -41,6 +41,7 @@ You can find in tools/ a script to get a fresh todo list, directly constructed f
 ## Tests
 You can copy/paste the tests folder inside your project. Edit the tests.hpp includes to your actual header files.
 Then you can compile all the cpp files inside the folder.
+I strongly advise you to compile with -fsantize=address -g3 on Linux to check leaks.
 ```sh
 ./a.out vector
 ./a.out list
@@ -50,3 +51,11 @@ Then you can compile all the cpp files inside the folder.
 ```
 You will have a formatted list of unit tests:
 ![Unit tests](./tests.png)
+## Compile the project
+```sh
+make vector
+make list
+make map
+make queue
+make stack
+```

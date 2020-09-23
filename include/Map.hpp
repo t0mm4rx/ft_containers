@@ -3,6 +3,7 @@
 # include <memory>
 # include <functional>
 # include <limits>
+# include <utility>
 # include "MapIterator.hpp"
 
 namespace ft
@@ -269,7 +270,7 @@ namespace ft
 					return (std::make_pair(tmp, false));
 				}
 				++_length;
-				return (make_pair(iterator(_insert_node(_root, value.first, value.second)), true));
+				return (std::make_pair(iterator(_insert_node(_root, value.first, value.second)), true));
 			};
 			iterator insert(iterator position, const value_type &value)
 			{
@@ -277,10 +278,10 @@ namespace ft
 				if ((tmp = find(value.first)) != end())
 				{
 					tmp->second = value.second;
-					return (std::make_pair(tmp, false));
+					return (iterator(tmp));
 				}
 				++_length;
-				return (make_pair(iterator(_insert_node(position.node(), value.first, value.second)), true));
+				return (iterator(_insert_node(position.node(), value.first, value.second)));
 			};
 			template <class InputIterator>
 			void insert(InputIterator first, InputIterator last)

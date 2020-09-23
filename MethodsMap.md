@@ -45,7 +45,7 @@
 - [x] value_compare value_comp() const;
 ## find
 - [x] iterator find (const key_type& k)
-- [ ] const_iterator find (const key_type& k) const;
+- [x] const_iterator find (const key_type& k) const;
 ## count
 - [x] size_type count (const key_type& k) const;
 ## lower_bound
