@@ -149,11 +149,13 @@ namespace ft
 			template <class InputIterator>
 			void assign(InputIterator first, InputIterator last)
 			{
+				clear();
 				while (first != last)
 					push_back(*(first++));
 			};
 			void assign(size_type n, const value_type &value)
 			{
+				clear();
 				while (n--)
 					push_back(value);
 			};
@@ -204,6 +206,7 @@ namespace ft
 				node el = _new_node(value, before, after);
 				before->next = el;
 				after->prev = el;
+				++_length;
 				return (iterator(el));
 			};
 			void insert(iterator position, size_type n, const value_type &value)
@@ -317,43 +320,23 @@ namespace ft
 			template <class BinaryPredicate>
 			void unique(BinaryPredicate binary_pred)
 			{
-				// iterator cur = begin();
-				// iterator next;
-				// while (cur + 1 != end())
-				// {
-				// 	next = cur + 1;
-				// 	while (next != end() && binary_pred(*cur, *next))
-				// 		next = erase(next);
-				// 	cur++;
-				// }
-				iterator it = begin();
-				iterator it2;
-				iterator tmp;
-				while (it != end())
+				iterator prev = begin();
+				iterator next = prev;
+				while (next + 1 != end())
 				{
-					it2 = it;
-					tmp = it2;
-					++it2;
-					while (it2 != end())
+					++next;
+					if (binary_pred(*prev, *next))
 					{
-						if (binary_pred(*it, *it2))
-						{
-							erase(it2);
-							it2 = tmp;
-						}
-						tmp = it2;
-						++it2;
+						erase(next);
+						next = prev;
 					}
-					it++;
+					else
+						prev = next;
 				}
 			};
 			void merge(List &x)
 			{
-				if (&x == this)
-					return;
-				insert(end(), x.begin(), x.end());
-				x.clear();
-				sort();
+				merge(x, _Smaller<value_type>());
 			};
 			template <class Compare>
 			void merge(List &x, Compare comp)

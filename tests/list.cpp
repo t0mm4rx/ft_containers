@@ -275,6 +275,8 @@ static void merge(void)
 	l1.merge(l3, compare);
 	l2.merge(l4, compare);
 	check("l1 == l2", l1 == l2);
+	print_list(l1);
+	print_list(l2);
 	check("l3 == l4", l3 == l4);
 }
 
