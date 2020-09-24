@@ -47,6 +47,15 @@ namespace ft
 			key_compare _comp;
 			node _root;
 			size_type _length;
+			void _debug_tree(node n)
+			{
+				if (!n)
+					return;
+				_debug_tree(n->left);
+				if (n->parent && !n->end)
+					std::cout << n->pair.first << "=" << n->pair.second << std::endl;
+				_debug_tree(n->right);
+			};
 			node _new_node(key_type key, mapped_type value, node parent, bool end = false)
 			{
 				node el = new BNode<key_type, mapped_type>();
@@ -74,7 +83,7 @@ namespace ft
 						n->left = _new_node(key, value, n, end);
 						return (n->left);
 					}
-					_insert_node(n->left, key, value);
+					return (_insert_node(n->left, key, value));
 				}
 				if (key < n->pair.first && !end)
 				{
@@ -100,7 +109,7 @@ namespace ft
 			node _find(node n, key_type key) const
 			{
 				node tmp;
-				if (!n->end && n->pair.first == key)
+				if (!n->end && n->pair.first == key && n->parent)
 					return (n);
 				if (n->right)
 				{
@@ -155,7 +164,7 @@ namespace ft
 			void _init_tree(void)
 			{
 				_root = _new_node(key_type(), mapped_type(), 0);
-				_insert_node(_root, key_type(), mapped_type(), true);
+				_root->right  = _new_node(key_type(), mapped_type(), _root, true);
 				_length = 0;
 			};
 			node _end(void) const
@@ -186,7 +195,6 @@ namespace ft
 			};
 			Map &operator=(const Map<Key, T> &other)
 			{
-				(void)other;
 				clear();
 				insert(other.begin(), other.end());
 				return (*this);
@@ -251,14 +259,13 @@ namespace ft
 			};
 			size_type max_size(void) const
 			{
-				return (std::numeric_limits<size_type>::max() / sizeof(node));
+				return (std::numeric_limits<size_type>::max() / (sizeof(ft::BNode<key_type, mapped_type>)));
 			};
 			mapped_type &operator[](const key_type& k)
 			{
 				iterator tmp = find(k);
 				if (tmp != end())
 					return tmp->second;
-				++_length;
 				return (insert(std::make_pair(k, mapped_type())).first->second);
 			};
 			std::pair<iterator, bool> insert(const value_type &value)
@@ -289,7 +296,7 @@ namespace ft
 				while (first != last)
 				{
 					insert(*first);
-					first++;
+					++first;
 				}
 			};
 			void erase(iterator position)
@@ -332,6 +339,8 @@ namespace ft
 			};
 			iterator find(const key_type &value)
 			{
+				if (empty())
+					return (end());
 				node tmp = _find(_root, value);
 				if (tmp)
 					return (iterator(tmp));
@@ -339,6 +348,8 @@ namespace ft
 			};
 			const_iterator find(const key_type &value) const
 			{
+				if (empty())
+					return (end());
 				node tmp = _find(_root, value);
 				if (tmp)
 					return (const_iterator(tmp));

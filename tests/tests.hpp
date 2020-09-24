@@ -105,7 +105,6 @@ bool operator==(ft::Map<T, S> &a, std::map<T, S> &b)
 {
 	if (a.size() != b.size())
 		return (false);
-	std::cout << "here" << std::endl;
 	if (a.empty() != b.empty())
 		return (false);
 	typename ft::Map<T, S>::iterator it = a.begin();

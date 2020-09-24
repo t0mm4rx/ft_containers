@@ -3,14 +3,14 @@
 #include <utility>
 
 template <class T>
-static void print_map(T map)
+static void print_map(T &map)
 {
 	typename T::iterator it = map.begin();
 	std::cout << " --- Map of size " << map.size() << " ---" << std::endl;
 	while (it != map.end())
 	{
 		std::cout << it->first << ": " << it->second << std::endl;
-		it++;
+		++it;
 	}
 	std::cout << " --- " << std::endl;
 }
@@ -36,6 +36,18 @@ static void constructors(void)
 	m8[0] = 1;
 	m8[1] = 2;
 	m8[2] = 3;
+	// print_map(m7);
+	// print_map(m8);
+	// std::cout << (++m7.begin())->second << std::endl;
+	// ft::Map<int, int>::iterator it = m7.begin();
+	// while (it != m7.end())
+	// {
+	// 	// ft::Map<int, int>::iterator it2 = m7.find(it->first);
+	// 	std::cout << it.node()->pair.second << std::endl;
+	// 	// std::cout << it->first << "=" << it2->second << std::endl;
+	// 	++it;
+	// }
+	check("(copy) m7 == m8", (m7 == m8));
 	ft::Map<int, int> m9;
 	std::map<int, int> m10;
 	m9 = m7;
@@ -157,8 +169,6 @@ static void clear(void)
 	m1.clear();
 	m2.clear();
 	check("m1 == m2", m1 == m2);
-	print_map(m1);
-	print_map(m2);
 }
 
 static void find(void)
