@@ -75,7 +75,7 @@ static void access_operator(void)
 	m1["b"] = 0;
 	m1["c"] = 42;
 	m1["d"] = -5;
-	m2["d"] = 11;
+	m1["d"] = 11;
 	m1["test"] = 100;
 	m2["a"] = 1;
 	m2["b"] = 0;
@@ -85,6 +85,7 @@ static void access_operator(void)
 	m2["test"] = 100;
 	check("m1 == m2", m1 == m2);
 	check("m1['a'] == m2['a']", m1["a"], m2["a"]);
+	check("m1['d'] == m2['d']", m1["d"], m2["d"]);
 	check("m1['test'] == m2['test']", m1["test"], m2["test"]);
 	check("m1['z'] == m2['z']", m1["z"], m2["z"]);
 }

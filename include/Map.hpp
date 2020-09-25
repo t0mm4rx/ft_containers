@@ -265,17 +265,16 @@ namespace ft
 			{
 				iterator tmp = find(k);
 				if (tmp != end())
+				{
 					return tmp->second;
+				}
 				return (insert(std::make_pair(k, mapped_type())).first->second);
 			};
 			std::pair<iterator, bool> insert(const value_type &value)
 			{
 				iterator tmp;
 				if ((tmp = find(value.first)) != end())
-				{
-					tmp->second = value.second;
 					return (std::make_pair(tmp, false));
-				}
 				++_length;
 				return (std::make_pair(iterator(_insert_node(_root, value.first, value.second)), true));
 			};
@@ -283,10 +282,7 @@ namespace ft
 			{
 				iterator tmp;
 				if ((tmp = find(value.first)) != end())
-				{
-					tmp->second = value.second;
-					return (iterator(tmp));
-				}
+					return (tmp);
 				++_length;
 				return (iterator(_insert_node(position.node(), value.first, value.second)));
 			};
@@ -420,6 +416,10 @@ namespace ft
 			{
 				return (std::pair<iterator, iterator>(this->lower_bound(k), this->upper_bound(k)));
 			};
+			// void debug(void)
+			// {
+			// 	_debug_tree(_root);
+			// };
 	};
 	template <class Key, class T, class Compare, class Alloc>
 	void swap(ft::Map<Key, T, Compare, Alloc> &x, ft::Map<Key, T, Compare, Alloc> &y)
@@ -429,6 +429,8 @@ namespace ft
 	template <class Key, class T, class Compare, class Alloc>
 	bool operator==(const Map<Key, T, Compare, Alloc> &lhs, const Map<Key, T, Compare, Alloc> &rhs)
 	{
+		if (lhs.size() != rhs.size())
+			return (false);
 		typename ft::Map<Key, T, Compare, Alloc>::const_iterator it = rhs.begin();
 		typename ft::Map<Key, T, Compare, Alloc>::const_iterator it2 = lhs.begin();
 		while (it != rhs.end())
@@ -448,9 +450,11 @@ namespace ft
 	template <class Key, class T, class Compare, class Alloc>
 	bool operator>(const Map<Key, T, Compare, Alloc> &lhs, const Map<Key, T, Compare, Alloc> &rhs)
 	{
-		typename ft::Map<Key, T, Compare, Alloc>::const_iterator it = rhs.begin();
-		typename ft::Map<Key, T, Compare, Alloc>::const_iterator it2 = lhs.begin();
-		while (it != rhs.end())
+		if (lhs.size() > rhs.size())
+			return (true);
+		typename ft::Map<Key, T, Compare, Alloc>::const_iterator it = lhs.begin();
+		typename ft::Map<Key, T, Compare, Alloc>::const_iterator it2 = rhs.begin();
+		while (it != lhs.end() && it2 != rhs.end())
 		{
 			if (*it > *it2)
 				return (true);
