@@ -255,6 +255,11 @@ static void unique()
 	check("l1 == l2", l1 == l2);
 }
 
+static bool compare2(int a, int b) 
+{ 
+    return (a == b); 
+} 
+
 static void merge(void)
 {
 	print_header("Merge");
@@ -272,11 +277,9 @@ static void merge(void)
 	l2.assign(test, test + 3);
 	l3.assign(test2, test2 + 3);
 	l4.assign(test2, test2 + 3);
-	l1.merge(l3, compare);
-	l2.merge(l4, compare);
+	l1.merge(l3, compare2);
+	l2.merge(l4, compare2);
 	check("l1 == l2", l1 == l2);
-	print_list(l1);
-	print_list(l2);
 	check("l3 == l4", l3 == l4);
 }
 
